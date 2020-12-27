@@ -21,6 +21,10 @@ namespace SphericalPaths
             MeshRenderer renderer = SphereParent.GetComponent<MeshRenderer>();
             SphereMaterial = new Material(renderer.material);
             renderer.material = SphereMaterial;
+
+            // Apply texture
+            if (Texture != null)
+                renderer.material.SetTexture("_MainTex", Texture);
         }
 
         /// <summary>
@@ -65,6 +69,13 @@ namespace SphericalPaths
         /// References the material used on the sphere.
         /// </summary>
         private Material SphereMaterial;
+
+        /// <summary>
+        /// An optional texture that will be applied to the sphere.
+        /// </summary>
+        [Tooltip("An optional texture that will be applied to the sphere.")]
+        [SerializeField]
+        private Texture Texture;
 
         /// <summary>
         /// The opacity of the sphere.
