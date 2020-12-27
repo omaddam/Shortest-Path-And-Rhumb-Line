@@ -18,10 +18,26 @@ namespace SphericalPaths
         /// <summary>
         /// Initializes the path.
         /// </summary>
-        /// <param name="path"></param>
-        public void Initialize(DataStructure.Path path)
+        public void Initialize(DataStructure.Path path, Color color,
+            bool displayOnSphere = true)
         {
+            // Set the data
             _Path = path;
+
+            // Initialize the line renderer
+            LineRenderer.positionCount = path.Coordinates.Count;
+
+            // Set color
+            LineRenderer.startColor = color;
+            LineRenderer.endColor = color;
+
+            // Display line
+            for (int i = 0; i < path.Coordinates.Count; i++)
+            {
+                LineRenderer.SetPosition(i, displayOnSphere
+                ? path.Coordinates[i].SphericalCoordinates
+                : new Vector3(path.Coordinates[i].PlaneCoordinates.x, path.Coordinates[i].PlaneCoordinates.y, 0));
+            }
         }
 
         #endregion
