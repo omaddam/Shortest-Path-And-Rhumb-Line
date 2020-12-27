@@ -105,11 +105,11 @@ namespace SphericalPaths.DataStructure
 
             // Compute left coordinates
             List<Coordinates> leftCoordinates = segmentsCount <= 0 ? null
-                : GetRhumbLine(start, midCoordinates, segmentsCount);
+                : GetRhumbLine(start, midCoordinates, segmentsCount / 2);
 
             // Compute right coordinates
             List<Coordinates> rightCoordinates = segmentsCount <= 0 ? null
-                : GetRhumbLine(midCoordinates, end, segmentsCount);
+                : GetRhumbLine(midCoordinates, end, segmentsCount / 2);
 
             // Set coordinates
             List<Coordinates> coordinates = new List<Coordinates>();
