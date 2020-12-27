@@ -33,7 +33,7 @@ namespace SphericalPaths
         /// <summary>
         /// The radius of the sphere.
         /// </summary>
-        [Tooltip("The radius of the sphere. Geenrated on awake.")]
+        [Tooltip("The radius of the sphere. Generated on awake.")]
         [SerializeField]
         private float _Radius;
 
