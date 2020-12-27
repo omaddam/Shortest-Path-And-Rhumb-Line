@@ -103,7 +103,7 @@ namespace SphericalPaths
         /// </summary>
         [Tooltip("References the template used when generating points.")]
         [SerializeField]
-        private GameObject PointsTempalte;
+        private GameObject PointsTemplate;
 
 
 
@@ -121,7 +121,7 @@ namespace SphericalPaths
         /// </summary>
         [Tooltip("References the template used when generating paths.")]
         [SerializeField]
-        private GameObject PathsTempalte;
+        private GameObject PathsTemplate;
 
         #endregion
 
@@ -144,7 +144,7 @@ namespace SphericalPaths
             foreach (var point in coordinates)
             {
                 // Create a new entity instance
-                GameObject pointInstance = Instantiate(PointsTempalte, PointsParent.transform);
+                GameObject pointInstance = Instantiate(PointsTemplate, PointsParent.transform);
 
                 // Extract the script
                 Point script = pointInstance.GetComponent<Point>();
@@ -181,7 +181,7 @@ namespace SphericalPaths
             foreach (var path in paths)
             {
                 // Create a new entity instance
-                GameObject pathInstance = Instantiate(PointsTempalte, PointsParent.transform);
+                GameObject pathInstance = Instantiate(PathsTemplate, PathsParent.transform);
 
                 // Extract the script
                 Path script = pathInstance.GetComponent<Path>();
