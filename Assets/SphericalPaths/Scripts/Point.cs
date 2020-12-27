@@ -22,7 +22,7 @@ namespace SphericalPaths
             // Set coordinates
             transform.position = displayOnSphere
                 ? coordinates.SphericalCoordinates
-                : coordinates.PlaneCoordinates;
+                : new Vector3(coordinates.PlaneCoordinates.x, coordinates.PlaneCoordinates.y, 0);
 
             // Set rotation
             transform.up = displayOnSphere
