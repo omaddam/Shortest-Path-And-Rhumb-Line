@@ -13,7 +13,8 @@ namespace SphericalPaths
         /// <summary>
         /// Initializes the point.
         /// </summary>
-        public void Initialize(Coordinates coordinates, bool displayOnSphere = true)
+        public void Initialize(Coordinates coordinates, Color color,
+            bool displayOnSphere = true)
         {
             // Set the data
             Coordinates = coordinates;
@@ -27,6 +28,13 @@ namespace SphericalPaths
             transform.up = displayOnSphere
                 ? coordinates.SphericalCoordinates.normalized
                 : transform.parent.up;
+
+            // Set material color
+            foreach (var meshRenderer in GetComponentsInChildren<MeshRenderer>())
+            {
+                meshRenderer.material = new Material(meshRenderer.material);
+                meshRenderer.material.color = color;
+            }
         }
 
         #endregion
