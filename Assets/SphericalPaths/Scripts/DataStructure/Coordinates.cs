@@ -35,11 +35,34 @@ namespace SphericalPaths.DataStructure
 
             // Set plane coordinates
             _Width = width;
-            _PlaneCoordinates = ConvertCartesianToPlanCoordinates(cartesianCoordinates, width);
+            _PlaneCoordinates = ConvertCartesianToPlaneCoordinates(cartesianCoordinates, width);
 
             // Set spherical coordinates
             _Radius = radius;
             _SphericalCoordinates = ConvertCartesianToSphericalCoordinates(cartesianCoordinates, radius);
+        }
+
+        /// <summary>
+        /// Spherical constructor.
+        /// </summary>
+        /// <param name="sphericalCoordinates">
+        /// X, Y, and Z coordinates normalized to be displayed on the 3d sphere.
+        /// </param>
+        /// <param name="radius">Radius of the 3d sphere displaying coordinates.</param>
+        /// <param name="width">Width of the 2d plane displaying coordinates.</param>
+        public Coordinates(Vector3 sphericalCoordinates,
+            float radius = 1, float width = 1)
+        {
+            // Set spherical coordinates
+            _Radius = radius;
+            _SphericalCoordinates = sphericalCoordinates;
+
+            // Set cartesian coordinates
+            _CartesianCoordinates = ConvertSphericalToCartesianCoordinates(sphericalCoordinates, radius);
+
+            // Set plane coordinates
+            _Width = width;
+            _PlaneCoordinates = ConvertCartesianToPlaneCoordinates(_CartesianCoordinates, width);
         }
 
         /// <summary>
@@ -139,7 +162,7 @@ namespace SphericalPaths.DataStructure
         /// </summary>
         /// <param name="cartesianCoordinates">Longitude and latitude coordinates. x = longitude [-180, 180]. y = latitude [-90, 90].</param>
         /// <param name="radius">Width of the 2d plane displaying coordinates.</param>
-        private Vector2 ConvertCartesianToPlanCoordinates(Vector2 cartesianCoordinates, float radius)
+        private Vector2 ConvertCartesianToPlaneCoordinates(Vector2 cartesianCoordinates, float radius)
         {
             return new Vector2
             (
@@ -167,6 +190,27 @@ namespace SphericalPaths.DataStructure
                 (float)(radius * Math.Cos(latitude)),
                 (float)(radius * Math.Sin(latitude) * Math.Sin(longitude))
             );
+        }
+
+        /// <summary>
+        /// Converts spherical coordinates to cartesian coordinates.
+        /// </summary>
+        /// <param name="radius">Radius of the 3d sphere displaying coordinates.</param>
+        private Vector2 ConvertSphericalToCartesianCoordinates(Vector3 sphericalCoordinates, float radius)
+        {
+            float latitude = (float)Math.Acos(sphericalCoordinates.y / radius);
+            float longitude = (float)Math.Atan(sphericalCoordinates.z / sphericalCoordinates.x);
+
+            latitude = 90.0f - (latitude * Mathf.Rad2Deg);
+
+            if (sphericalCoordinates.x < 0)
+                longitude = longitude * Mathf.Rad2Deg;
+            else if (sphericalCoordinates.z > 0 && sphericalCoordinates.x > 0)
+                longitude = -(180.0f - longitude * Mathf.Rad2Deg);
+            else if (sphericalCoordinates.z < 0 && sphericalCoordinates.x > 0)
+                longitude = 180.0f + longitude * Mathf.Rad2Deg;
+
+            return new Vector2(longitude, latitude);
         }
 
         /// <summary>
