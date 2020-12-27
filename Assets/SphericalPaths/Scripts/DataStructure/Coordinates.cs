@@ -150,6 +150,9 @@ namespace SphericalPaths.DataStructure
             double longitude = Math.PI * cartesianCoordinates.x / 180.0f;
             double latitude = Math.PI * cartesianCoordinates.y / 180.0f;
 
+            // Adjust position by radians	
+            latitude -= 1.570795765134f; // subtract 90 degrees (in radians)
+            
             return new Vector3
             (
                 (float)(radius * Math.Sin(latitude) * Math.Cos(longitude)),
