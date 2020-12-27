@@ -87,6 +87,14 @@ namespace SphericalPaths
         [SerializeField]
         public float Opacity = 1;
 
+        /// <summary>
+        /// The light intensity of the sphere.
+        /// </summary>
+        [Tooltip("The light intensity of the sphere.")]
+        [Range(0, 1)]
+        [SerializeField]
+        public float Intensity = 0.31f;
+
 
 
         [Header("Points")]
