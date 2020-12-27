@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace SphericalPaths.DataStructure
@@ -14,8 +15,13 @@ namespace SphericalPaths.DataStructure
         /// </summary>
         private const int RHUMB_PATH_SEGMENTS_COUNT = 15;
 
+        /// <summary>
+        /// The default number of coordinates required to form a path.
+        /// </summary>
+        private const int SHORTEST_PATH_SEGMENTS_COUNT = 15;
+
         #endregion
-        
+
         #region Conversion Methods
 
         /// <summary>
@@ -149,6 +155,88 @@ namespace SphericalPaths.DataStructure
             // Compute midpoint
             Vector2 midRadian = new Vector2(midLong, midLat);
             return new Coordinates(midRadian.ToDegree(), start.Radius, start.Width);
+        }
+
+        #endregion
+
+        #region Shortest Path Methods
+
+        /// <summary>
+        /// Generates the path between the two coordinates using shortest path.
+        /// </summary>
+        /// <param name="start">The first coordinates in the path.</param>
+        /// <param name="end">The last coordinates in the path.</param>
+        /// <param name="segmentsCount">The default number of coordinates required to form the path.</param>
+        public static Path GetShortestPath(this Coordinates start, Coordinates end,
+            int segmentsCount = SHORTEST_PATH_SEGMENTS_COUNT)
+        {
+            // Compute the straight line
+            List<Vector3> segmentPoints = GetStraightLine(
+                start.SphericalCoordinates, end.SphericalCoordinates, segmentsCount);
+
+            // Find the projection of the straight line onto the sphere
+            List<Vector3> arc = ProjectPointsOnSphere(segmentPoints, start.Radius);
+
+            // Generate list of coordinates
+            List<Coordinates> coordinates = arc.Select(x => new Coordinates(x, start.Radius, start.Width)).ToList();
+
+            return new Path(coordinates);
+        }
+
+        /// <summary>
+        /// Computes the positions of points that form a straight path.
+        /// </summary>
+        /// <param name="start">The first coordinates in the path.</param>
+        /// <param name="end">The last coordinates in the path.</param>
+        /// <param name="segmentsCount">The default number of coordinates required to form the path.</param>
+        /// <returns></returns>
+        private static List<Vector3> GetStraightLine(Vector3 start, Vector3 end,
+            int segmentsCount)
+        {
+            // Compute midpoint
+            Vector3 midCoordinates = new Vector3
+            (
+                (start.x + end.x) / 2f,
+                (start.y + end.y) / 2f,
+                (start.z + end.z) / 2f
+            );
+
+            // Decrement segments count
+            segmentsCount--;
+
+            // Compute left coordinates
+            List<Vector3> leftCoordinates = segmentsCount > 0 ? null
+                : GetStraightLine(start, midCoordinates, segmentsCount);
+
+            // Compute right coordinates
+            List<Vector3> rightCoordinates = segmentsCount > 0 ? null
+                : GetStraightLine(midCoordinates, end, segmentsCount);
+
+            // Set coordinates
+            List<Vector3> coordinates = new List<Vector3>();
+            if (leftCoordinates != null)
+                coordinates.AddRange(leftCoordinates);
+            coordinates.Add(midCoordinates);
+            if (rightCoordinates != null)
+                coordinates.AddRange(rightCoordinates);
+            return coordinates;
+        }
+
+        /// <summary>
+        /// Projects points onto the sphere.
+        /// </summary>
+        /// <param name="points">The points to project.</param>
+        /// <param name="radius">The radius of the sphere projecting the points.</param>
+        private static List<Vector3> ProjectPointsOnSphere(List<Vector3> points, float radius)
+        {
+            // Initialize projection list
+            List<Vector3> projectedPoints = new List<Vector3>();
+
+            // Go through each point and compute its projection
+            foreach (var point in points)
+                projectedPoints.Add(point.normalized * radius);
+
+            return projectedPoints;
         }
 
         #endregion
