@@ -13,9 +13,20 @@ namespace SphericalPaths
         /// <summary>
         /// Initializes the point.
         /// </summary>
-        public void Initialize(Coordinates coordinates)
+        public void Initialize(Coordinates coordinates, bool displayOnSphere = true)
         {
+            // Set the data
             Coordinates = coordinates;
+
+            // Set coordinates
+            transform.position = displayOnSphere
+                ? coordinates.SphericalCoordinates
+                : coordinates.PlaneCoordinates;
+
+            // Set rotation
+            transform.up = displayOnSphere
+                ? coordinates.SphericalCoordinates.normalized
+                : transform.parent.up;
         }
 
         #endregion
