@@ -1,3 +1,4 @@
+using SphericalPaths.DataStructure;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -103,6 +104,45 @@ namespace SphericalPaths
         [Tooltip("References the template used when generating points.")]
         [SerializeField]
         private GameObject PointsTempalte;
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Clear all points.
+        /// </summary>
+        public void ClearPoints()
+        {
+            foreach (Transform entity in PointsParent.transform)
+                GameObject.Destroy(entity.gameObject);
+        }
+
+        /// <summary>
+        /// Appends a list of points to the sphere.
+        /// </summary>
+        public void DisplayPoints(List<Coordinates> coordinates, Color color)
+        {
+            foreach (var point in coordinates)
+            {
+                // Create a new entity instance
+                GameObject pointInstance = Instantiate(PointsTempalte, PointsParent.transform);
+
+                // Extract the script
+                Point script = pointInstance.GetComponent<Point>();
+
+                // Initialize data
+                script.Initialize(point, color, true);
+            }
+        }
+
+        /// <summary>
+        /// Appends a single point to the sphere.
+        /// </summary>
+        public void DisplayPoints(Coordinates coordinates, Color color)
+        {
+            DisplayPoints(new List<Coordinates>() { coordinates }, color);
+        }
 
         #endregion
 
