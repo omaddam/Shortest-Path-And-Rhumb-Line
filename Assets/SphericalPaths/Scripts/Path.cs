@@ -32,6 +32,7 @@ namespace SphericalPaths
             LineRenderer.endColor = color;
 
             // Display line
+            LineRenderer.useWorldSpace = false;
             for (int i = 0; i < path.Coordinates.Count; i++)
             {
                 LineRenderer.SetPosition(i, displayOnSphere
