@@ -10,6 +10,14 @@ namespace SphericalPaths.DataStructure
         #region Constructors
 
         /// <summary>
+        /// Empty constructor.
+        /// </summary>
+        public Coordinates()
+            : this(Vector2.zero)
+        {
+        }
+
+        /// <summary>
         /// Cartesion constructor.
         /// </summary>
         /// <param name="cartesianCoordinates">
