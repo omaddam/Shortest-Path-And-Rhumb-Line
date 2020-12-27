@@ -105,6 +105,24 @@ namespace SphericalPaths
         [SerializeField]
         private GameObject PointsTempalte;
 
+
+
+        [Header("Paths")]
+
+        /// <summary>
+        /// References the gameobject displays the paths.
+        /// </summary>
+        [Tooltip("References the gameobject displays the paths.")]
+        [SerializeField]
+        private GameObject PathsParent;
+
+        /// <summary>
+        /// References the template used when generating paths.
+        /// </summary>
+        [Tooltip("References the template used when generating paths.")]
+        [SerializeField]
+        private GameObject PathsTempalte;
+
         #endregion
 
         #region Methods
