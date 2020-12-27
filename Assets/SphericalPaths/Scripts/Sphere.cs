@@ -16,7 +16,7 @@ namespace SphericalPaths
         private void Awake()
         {
             // Extract the radius of thye sphere
-            _Radius = SphereParent.transform.localScale.x / 2f;
+            _Radius = SphereParent.transform.localScale.x;
 
             // Extract the material used on the sphere
             MeshRenderer renderer = SphereParent.GetComponent<MeshRenderer>();
