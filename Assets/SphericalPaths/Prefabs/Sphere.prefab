@@ -81,6 +81,7 @@ MonoBehaviour:
   Texture: {fileID: 0}
   Opacity: 1
   PointsParent: {fileID: 8649031173232268542}
+  PointsTempalte: {fileID: 5933918061036991306, guid: 35e77bdb7e5e6224285e8b1265d59508, type: 3}
 --- !u!1 &8649031174675430653
 GameObject:
   m_ObjectHideFlags: 0

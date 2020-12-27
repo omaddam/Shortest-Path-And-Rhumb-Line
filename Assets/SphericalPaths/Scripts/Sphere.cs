@@ -51,7 +51,8 @@ namespace SphericalPaths
         /// References the gameobject displays the 3d sphere.
         /// </summary>
         [Tooltip("References the gameobject displays the 3d sphere.")]
-        public GameObject SphereParent;
+        [SerializeField]
+        private GameObject SphereParent;
 
         /// <summary>
         /// The radius of the sphere.
@@ -93,7 +94,15 @@ namespace SphericalPaths
         /// References the gameobject displays the points.
         /// </summary>
         [Tooltip("References the gameobject displays the points.")]
-        public GameObject PointsParent;
+        [SerializeField]
+        private GameObject PointsParent;
+
+        /// <summary>
+        /// References the template used when generating points.
+        /// </summary>
+        [Tooltip("References the template used when generating points.")]
+        [SerializeField]
+        private GameObject PointsTempalte;
 
         #endregion
 
