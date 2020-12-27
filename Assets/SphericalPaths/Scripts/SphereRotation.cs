@@ -34,6 +34,17 @@ namespace SphericalPaths
         #region Methods
 
         /// <summary>
+        /// Focuses on a specific coordinates.
+        /// </summary>
+        public void Focus(float longitude, float latitude)
+        {
+            Longitude = longitude;
+            Latitude = latitude;
+
+            ApplyPositionToTransform();
+        }
+
+        /// <summary>
         /// Rotates the object  to focus on the computed longitude and latitude.
         /// </summary>
         private void ApplyPositionToTransform()
