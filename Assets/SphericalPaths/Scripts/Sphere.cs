@@ -25,7 +25,7 @@ namespace SphericalPaths
 
             // Apply texture
             if (Texture != null)
-                renderer.material.SetTexture("_MainTex", Texture);
+                SphereMaterial.SetTexture("_MainTex", Texture);
         }
 
         /// <summary>
