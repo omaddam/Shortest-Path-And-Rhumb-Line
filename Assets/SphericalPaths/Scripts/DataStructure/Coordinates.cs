@@ -94,7 +94,7 @@ namespace SphericalPaths.DataStructure
         /// x = longitude [-180, 180].
         /// y = latitude [-90, 90].
         /// </summary>
-        public Vector2 CartesianCoordinates { get { return CartesianCoordinates; } }
+        public Vector2 CartesianCoordinates { get { return _CartesianCoordinates; } }
 
 
 
