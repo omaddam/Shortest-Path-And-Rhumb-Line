@@ -15,6 +15,15 @@ namespace SphericalPaths
             LineRenderer = GetComponent<LineRenderer>();
         }
 
+        /// <summary>
+        /// Initializes the path.
+        /// </summary>
+        /// <param name="path"></param>
+        public void Initialize(DataStructure.Path path)
+        {
+            _Path = path;
+        }
+
         #endregion
 
         #region Fields/Properties
@@ -23,6 +32,13 @@ namespace SphericalPaths
         /// References the line renderer attached to this object that displays the path.
         /// </summary>
         private LineRenderer LineRenderer;
+
+        /// <summary>
+        /// The path being presented.
+        /// </summary>
+        [Tooltip("The path being presented.")]
+        [SerializeField]
+        private DataStructure.Path _Path;
 
         #endregion
 
