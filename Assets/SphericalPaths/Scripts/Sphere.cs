@@ -1,6 +1,7 @@
 using SphericalPaths.DataStructure;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace SphericalPaths
@@ -26,10 +27,13 @@ namespace SphericalPaths
             // Apply texture
             if (Texture != null)
                 SphereMaterial.SetTexture("_MainTex", Texture);
+
+            // Extracts the lights inside the sphere
+            SphereLights = SphereParent.GetComponentsInChildren<Light>()?.ToList();
         }
 
         /// <summary>
-        /// Continuously update the opacity of the sphere.
+        /// Continuously update the opacity and intensity of the sphere.
         /// </summary>
         private void Update()
         {
@@ -40,6 +44,8 @@ namespace SphericalPaths
                 SphereMaterial.color.b,
                 Opacity
             );
+
+            SphereLights.ForEach(x => x.intensity = Intensity);
         }
 
         #endregion
@@ -86,6 +92,11 @@ namespace SphericalPaths
         [Range(0, 1)]
         [SerializeField]
         public float Opacity = 1;
+
+        /// <summary>
+        /// References the lights inside the sphere.
+        /// </summary>
+        private List<Light> SphereLights;
 
         /// <summary>
         /// The light intensity of the sphere.
