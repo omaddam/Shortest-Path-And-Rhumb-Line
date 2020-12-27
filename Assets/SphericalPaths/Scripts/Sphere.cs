@@ -85,6 +85,16 @@ namespace SphericalPaths
         [SerializeField]
         public float Opacity = 1;
 
+
+
+        [Header("Points")]
+
+        /// <summary>
+        /// References the gameobject displays the points.
+        /// </summary>
+        [Tooltip("References the gameobject displays the points.")]
+        public GameObject PointsParent;
+
         #endregion
 
     }

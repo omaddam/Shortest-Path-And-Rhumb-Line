@@ -78,6 +78,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SphereParent: {fileID: 8649031174856817155}
   _Radius: 0
+  Texture: {fileID: 0}
+  Opacity: 1
+  PointsParent: {fileID: 8649031173232268542}
 --- !u!1 &8649031174675430653
 GameObject:
   m_ObjectHideFlags: 0
