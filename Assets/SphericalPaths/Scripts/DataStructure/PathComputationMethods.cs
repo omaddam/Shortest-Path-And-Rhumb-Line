@@ -81,7 +81,11 @@ namespace SphericalPaths.DataStructure
 		public static Path GetRhumbPath(this Coordinates start, Coordinates end, 
             int segmentsCount = RHUMB_PATH_SEGMENTS_COUNT)
         {
-            return new Path(GetRhumbLine(start, end, segmentsCount));
+            List<Coordinates> coordinates = GetRhumbLine(start, end, segmentsCount);
+            coordinates.Insert(0, start);
+            coordinates.Add(end);
+
+            return new Path(coordinates);
         }
 
         /// <summary>
