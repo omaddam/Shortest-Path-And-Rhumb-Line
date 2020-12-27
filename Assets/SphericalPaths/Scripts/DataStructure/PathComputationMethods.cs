@@ -100,11 +100,11 @@ namespace SphericalPaths.DataStructure
             segmentsCount--;
 
             // Compute left coordinates
-            List<Coordinates> leftCoordinates = segmentsCount > 0 ? null
+            List<Coordinates> leftCoordinates = segmentsCount <= 0 ? null
                 : GetRhumbLine(start, midCoordinates, segmentsCount);
 
             // Compute right coordinates
-            List<Coordinates> rightCoordinates = segmentsCount > 0 ? null
+            List<Coordinates> rightCoordinates = segmentsCount <= 0 ? null
                 : GetRhumbLine(midCoordinates, end, segmentsCount);
 
             // Set coordinates
@@ -179,6 +179,8 @@ namespace SphericalPaths.DataStructure
 
             // Generate list of coordinates
             List<Coordinates> coordinates = arc.Select(x => new Coordinates(x, start.Radius, start.Width)).ToList();
+            coordinates.Insert(0, start);
+            coordinates.Add(end);
 
             return new Path(coordinates);
         }
@@ -205,12 +207,12 @@ namespace SphericalPaths.DataStructure
             segmentsCount--;
 
             // Compute left coordinates
-            List<Vector3> leftCoordinates = segmentsCount > 0 ? null
-                : GetStraightLine(start, midCoordinates, segmentsCount);
+            List<Vector3> leftCoordinates = segmentsCount <= 0 ? null
+                : GetStraightLine(start, midCoordinates, segmentsCount / 2);
 
             // Compute right coordinates
-            List<Vector3> rightCoordinates = segmentsCount > 0 ? null
-                : GetStraightLine(midCoordinates, end, segmentsCount);
+            List<Vector3> rightCoordinates = segmentsCount <= 0 ? null
+                : GetStraightLine(midCoordinates, end, segmentsCount / 2);
 
             // Set coordinates
             List<Vector3> coordinates = new List<Vector3>();
