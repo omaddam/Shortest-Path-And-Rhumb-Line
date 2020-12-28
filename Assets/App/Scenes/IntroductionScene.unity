@@ -1099,6 +1099,9 @@ MonoBehaviour:
   StartLatitudeInputField: {fileID: 2054000775}
   StartLongitudeInputField: {fileID: 679409897}
   StartSamplesDropdown: {fileID: 1938787814}
+  EndLatitudeInputField: {fileID: 176206723}
+  EndLongitudeInputField: {fileID: 638328122}
+  EndSamplesDropdown: {fileID: 311922799}
 --- !u!1 &547317190
 GameObject:
   m_ObjectHideFlags: 0

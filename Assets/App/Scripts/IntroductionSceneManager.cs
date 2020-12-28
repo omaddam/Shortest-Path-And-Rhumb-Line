@@ -53,6 +53,31 @@ public class IntroductionSceneManager : MonoBehaviour
     [SerializeField]
     private Dropdown StartSamplesDropdown;
 
+
+
+    [Header("End Coordinates")]
+
+    /// <summary>
+    /// References the input field UI element that contains the latitude.
+    /// </summary>
+    [Tooltip("References the input field UI element that contains the latitude.")]
+    [SerializeField]
+    private InputField EndLatitudeInputField;
+
+    /// <summary>
+    /// References the input field UI element that contains the longitude.
+    /// </summary>
+    [Tooltip("References the input field UI element that contains the longitude.")]
+    [SerializeField]
+    private InputField EndLongitudeInputField;
+
+    /// <summary>
+    /// References the dropdown UI element that contains the samples.
+    /// </summary>
+    [Tooltip("References the dropdown UI element that contains the samples.")]
+    [SerializeField]
+    private Dropdown EndSamplesDropdown;
+
     #endregion
 
 }
