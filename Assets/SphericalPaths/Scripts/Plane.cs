@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace SphericalPaths
 {
-    public class Sphere : MonoBehaviour
+    public class Plane : MonoBehaviour
     {
 
         #region Initialization
@@ -16,92 +16,76 @@ namespace SphericalPaths
         /// </summary>
         private void Awake()
         {
-            // Extract the radius of the sphere
-            _Radius = SphereParent.transform.localScale.x;
+            // Extract the width of the plane
+            _Width = PlaneParent.transform.localScale.x * 10;
 
-            // Extract the material used on the sphere
-            MeshRenderer renderer = SphereParent.GetComponent<MeshRenderer>();
-            SphereMaterial = new Material(renderer.material);
-            renderer.material = SphereMaterial;
+            // Extract the material used on the plane
+            MeshRenderer renderer = PlaneParent.GetComponent<MeshRenderer>();
+            PlaneMaterial = new Material(renderer.material);
+            renderer.material = PlaneMaterial;
 
             // Apply texture
             if (Texture != null)
-                SphereMaterial.SetTexture("_MainTex", Texture);
+                PlaneMaterial.SetTexture("_MainTex", Texture);
 
-            // Extracts the lights inside the sphere
-            SphereLights = SphereParent.GetComponentsInChildren<Light>()?.ToList();
+            // Extracts the lights inside the plane
+            PlaneLights = PlaneParent.GetComponentsInChildren<Light>()?.ToList();
         }
 
         /// <summary>
-        /// Continuously update the opacity and intensity of the sphere.
+        /// Continuously update the intensity of the plane.
         /// </summary>
         private void Update()
         {
-            SphereMaterial.color = new Color
-            (
-                SphereMaterial.color.r,
-                SphereMaterial.color.g,
-                SphereMaterial.color.b,
-                Opacity
-            );
-
-            SphereLights.ForEach(x => x.intensity = Intensity);
+            PlaneLights.ForEach(x => x.intensity = Intensity);
         }
 
         #endregion
 
         #region Fields/Properties
 
-        [Header("Sphere")]
+        [Header("Plane")]
 
         /// <summary>
         /// References the gameobject displays the 3d sphere.
         /// </summary>
-        [Tooltip("References the gameobject displays the 3d sphere.")]
+        [Tooltip("References the gameobject displays the 2d plane.")]
         [SerializeField]
-        private GameObject SphereParent;
+        private GameObject PlaneParent;
 
         /// <summary>
-        /// The radius of the sphere.
+        /// The width of the plane.
         /// </summary>
-        [Tooltip("The radius of the sphere. Generated on awake.")]
+        [Tooltip("The width of the plane. Generated on awake.")]
         [SerializeField]
-        private float _Radius;
+        private float _Width;
 
         /// <summary>
-        /// The radius of the sphere.
+        /// The width of the plane.
         /// </summary>
-        public float Radius { get { return _Radius; } }
+        public float Width { get { return _Width; } }
 
         /// <summary>
-        /// References the material used on the sphere.
+        /// References the material used on the plane.
         /// </summary>
-        private Material SphereMaterial;
+        private Material PlaneMaterial;
 
         /// <summary>
-        /// An optional texture that will be applied to the sphere.
+        /// An optional texture that will be applied to the plane.
         /// </summary>
-        [Tooltip("An optional texture that will be applied to the sphere.")]
+        [Tooltip("An optional texture that will be applied to the plane.")]
         [SerializeField]
         private Texture Texture;
 
         /// <summary>
-        /// The opacity of the sphere.
+        /// References the lights inside the plane.
         /// </summary>
-        [Tooltip("The opacity of the sphere.")]
-        [Range(0, 1)]
-        [SerializeField]
-        public float Opacity = 1;
+        private List<Light> PlaneLights;
 
         /// <summary>
-        /// References the lights inside the sphere.
+        /// The light intensity of the plane.
         /// </summary>
-        private List<Light> SphereLights;
-
-        /// <summary>
-        /// The light intensity of the sphere.
-        /// </summary>
-        [Tooltip("The light intensity of the sphere.")]
+        [Tooltip("The light intensity of the plane.")]
         [Range(0, 1)]
         [SerializeField]
         public float Intensity = 0.31f;
@@ -169,7 +153,7 @@ namespace SphericalPaths
                 Point script = pointInstance.GetComponent<Point>();
 
                 // Initialize data
-                script.Initialize(point, color, true);
+                script.Initialize(point, color, false);
             }
         }
 
@@ -206,7 +190,7 @@ namespace SphericalPaths
                 Path script = pathInstance.GetComponent<Path>();
 
                 // Initialize data
-                script.Initialize(path, color, true);
+                script.Initialize(path, color, false);
             }
         }
 

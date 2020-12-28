@@ -37,7 +37,7 @@ namespace SphericalPaths
             {
                 LineRenderer.SetPosition(i, displayOnSphere
                 ? path.Coordinates[i].SphericalCoordinates
-                : new Vector3(path.Coordinates[i].PlaneCoordinates.x, path.Coordinates[i].PlaneCoordinates.y, 0));
+                : new Vector3(path.Coordinates[i].PlaneCoordinates.x, 0, path.Coordinates[i].PlaneCoordinates.y));
             }
         }
 

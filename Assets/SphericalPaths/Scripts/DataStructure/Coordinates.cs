@@ -161,13 +161,13 @@ namespace SphericalPaths.DataStructure
         /// Converts cartesian coordinates to a plane coordinates.
         /// </summary>
         /// <param name="cartesianCoordinates">Longitude and latitude coordinates. x = longitude [-180, 180]. y = latitude [-90, 90].</param>
-        /// <param name="radius">Width of the 2d plane displaying coordinates.</param>
-        private Vector2 ConvertCartesianToPlaneCoordinates(Vector2 cartesianCoordinates, float radius)
+        /// <param name="width">Width of the 2d plane displaying coordinates.</param>
+        private Vector2 ConvertCartesianToPlaneCoordinates(Vector2 cartesianCoordinates, float width)
         {
             return new Vector2
             (
-                cartesianCoordinates.x / 180f * radius,
-                cartesianCoordinates.y / 90f * radius
+                cartesianCoordinates.x / 360f * width,
+                cartesianCoordinates.y / 360f * width
             );
         }
 

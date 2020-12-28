@@ -20,9 +20,9 @@ namespace SphericalPaths
             Coordinates = coordinates;
 
             // Set coordinates
-            transform.position = displayOnSphere
+            transform.localPosition = displayOnSphere
                 ? coordinates.SphericalCoordinates
-                : new Vector3(coordinates.PlaneCoordinates.x, coordinates.PlaneCoordinates.y, 0);
+                : new Vector3(coordinates.PlaneCoordinates.x, 0, coordinates.PlaneCoordinates.y);
 
             // Set rotation
             transform.up = displayOnSphere
