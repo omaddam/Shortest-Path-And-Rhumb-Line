@@ -699,6 +699,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8649031173423809939}
   - component: {fileID: 4661171419304343961}
+  - component: {fileID: 1586351358629965773}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -739,10 +740,23 @@ MonoBehaviour:
   _Radius: 0
   Texture: {fileID: 0}
   Opacity: 1
+  Intensity: 0.31
   PointsParent: {fileID: 8649031173232268542}
   PointsTemplate: {fileID: 5933918061036991306, guid: 35e77bdb7e5e6224285e8b1265d59508, type: 3}
   PathsParent: {fileID: 8649031174675430653}
   PathsTemplate: {fileID: 3972847183426544577, guid: fe30efe592b4b3c4a9b3ef3733aedf8f, type: 3}
+--- !u!114 &1586351358629965773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8649031173423809938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36904cb7c860c39448dab392d2a0ac85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8649031174675430653
 GameObject:
   m_ObjectHideFlags: 0
