@@ -9,7 +9,7 @@ public class MainSceneManager : MonoBehaviour
     /// <summary>
     /// Executes once on awake.
     /// </summary>
-    private void Start()
+    private void Awake()
     {
         // Enable (to invoke the awake method) then disable them immediately
         Sphere.gameObject.SetActive(true);
