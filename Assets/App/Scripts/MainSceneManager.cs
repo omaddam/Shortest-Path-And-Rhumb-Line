@@ -11,22 +11,22 @@ public class MainSceneManager : MonoBehaviour
     /// <summary>
     /// The color used to display the start point.
     /// </summary>
-    private static readonly Color START_POINT_COLOR = Color.green;
+    private static readonly Color START_POINT_COLOR = Color.blue;
 
     /// <summary>
     /// The color used to display the end point.
     /// </summary>
-    private static readonly Color END_POINT_COLOR = Color.red;
+    private static readonly Color END_POINT_COLOR = Color.black;
 
     /// <summary>
     /// The color used to display the shortest path.
     /// </summary>
-    private static readonly Color SHORTEST_PATH_COLOR = Color.white;
+    private static readonly Color SHORTEST_PATH_COLOR = Color.red;
 
     /// <summary>
     /// The color used to display the rhumb path.
     /// </summary>
-    private static readonly Color RHUMB_PATH_COLOR = Color.blue;
+    private static readonly Color RHUMB_PATH_COLOR = Color.green;
 
     /// <summary>
     /// The light intensity applied to the sphere.
@@ -118,6 +118,7 @@ public class MainSceneManager : MonoBehaviour
 
         // Show sphere
         Sphere.gameObject.SetActive(true);
+        Sphere.transform.eulerAngles = Vector3.zero;
 
         // Clear everything displayed on the sphere
         Sphere.ClearPoints();
