@@ -24,6 +24,13 @@ public class MainSceneManager : MonoBehaviour
     #region Fields/Properties
 
     /// <summary>
+    /// References the scriptable object that stores the demo information.
+    /// </summary>
+    [Tooltip("References the scriptable object that stores the demo information.")]
+    [SerializeField]
+    private PathManagerScriptableObject PathsScriptableObject;
+
+    /// <summary>
     /// References the sphere in the scene.
     /// </summary>
     public SphericalPaths.Sphere Sphere;

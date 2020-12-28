@@ -326,6 +326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56bc7bc53957fe14bb97b4bf03ffe4f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PathsScriptableObject: {fileID: 11400000, guid: e27bd0ba17891ff42af71e206b294455, type: 2}
   Sphere: {fileID: 8649031174807674473}
   Plane: {fileID: 117784886}
 --- !u!1 &1513896810
