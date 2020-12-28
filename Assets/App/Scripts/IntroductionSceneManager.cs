@@ -29,7 +29,7 @@ public class IntroductionSceneManager : MonoBehaviour
     {
         {  "North Pole", new Vector2(0, 90) },
         {  "Calgary, AB, Canada", new Vector2(-114.0719f, 51.0447f) },
-        {  "Beirut, Lebanon", new Vector2(-114.0719f, 51.0447f) },
+        {  "Beirut, Lebanon", new Vector2(35.5018f, 33.8938f) },
         {  "London, UK", new Vector2(-0.104788f, 51.485530f) },
         {  "Mecca, KSA", new Vector2(39.826210f, 21.422486f) }
     };
