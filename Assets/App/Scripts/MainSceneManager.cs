@@ -53,6 +53,15 @@ public class MainSceneManager : MonoBehaviour
         Sphere.gameObject.SetActive(false);
         Plane.gameObject.SetActive(false);
 
+        // Display path information
+        PathText.text = string.Format("{0} [Lat: {1:0.000}, Lon: {2:0.000}] to {3} [Lat: {4:0.000}, Lon: {5:0.000}]",
+            PathsScriptableObject.StartLabel,
+            PathsScriptableObject.StartCoordinates.CartesianCoordinates.y,
+            PathsScriptableObject.StartCoordinates.CartesianCoordinates.x,
+            PathsScriptableObject.EndLabel,
+            PathsScriptableObject.EndCoordinates.CartesianCoordinates.y,
+            PathsScriptableObject.EndCoordinates.CartesianCoordinates.x);
+
         // Display the sphere
         DisplaySphere();
     }
@@ -74,6 +83,13 @@ public class MainSceneManager : MonoBehaviour
     [Tooltip("References the button that swithces between the sphere and plane view.")]
     [SerializeField]
     private Button SwitchButton;
+
+    /// <summary>
+    /// References the text that displays the path start/end point information.
+    /// </summary>
+    [Tooltip("References the text that displays the path start/end point information.")]
+    [SerializeField]
+    private Text PathText;
 
     /// <summary>
     /// References the sphere in the scene.
