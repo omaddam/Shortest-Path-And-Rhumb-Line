@@ -124,6 +124,33 @@ public class MainSceneManager : MonoBehaviour
             PathsScriptableObject.StartCoordinates.CartesianCoordinates.y);
     }
 
+    /// <summary>
+    /// Displays the points and paths on the plane.
+    /// </summary>
+    private void DisplayPlane()
+    {
+        // Hide sphere
+        Sphere.gameObject.SetActive(false);
+
+        // Show plane
+        Plane.gameObject.SetActive(true);
+
+        // Clear everything displayed on the plane
+        Plane.ClearPoints();
+        Plane.ClearPaths();
+
+        // Set light intensity
+        Plane.Intensity = PLANE_LIGHT_INTENSITY;
+
+        // Display points
+        Plane.DisplayPoints(PathsScriptableObject.StartCoordinates, START_POINT_COLOR);
+        Plane.DisplayPoints(PathsScriptableObject.EndCoordinates, END_POINT_COLOR);
+
+        // Display paths
+        Plane.DisplayPaths(PathsScriptableObject.ShortestPath, SHORTEST_PATH_COLOR);
+        Plane.DisplayPaths(PathsScriptableObject.RhumbPath, RHUMB_PATH_COLOR);
+    }
+
     #endregion
 
 }
