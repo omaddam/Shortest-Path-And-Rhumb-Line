@@ -46,9 +46,6 @@ public class IntroductionSceneManager : MonoBehaviour
         // Display version
         VersionText.text = string.Format("Version: {0}", Application.version);
 
-        // Clear data
-        PathsScriptableObject.Clear();
-
         // Populate samples dropdowns
         PopulateCoordinatesSampleDropdown();
     }
@@ -134,6 +131,12 @@ public class IntroductionSceneManager : MonoBehaviour
         StartSamplesDropdown.ClearOptions();
         EndSamplesDropdown.ClearOptions();
 
+        // Set custom coordinates
+        StartLatitudeInputField.text = PathsScriptableObject.StartCoordinates.CartesianCoordinates.y.ToString();
+        StartLongitudeInputField.text = PathsScriptableObject.StartCoordinates.CartesianCoordinates.x.ToString();
+        EndLatitudeInputField.text = PathsScriptableObject.EndCoordinates.CartesianCoordinates.y.ToString();
+        EndLongitudeInputField.text = PathsScriptableObject.EndCoordinates.CartesianCoordinates.x.ToString();
+
         // Display samples in start dropdown
         StartSamplesDropdown.AddOptions(new List<string> { "Custom" });
         StartSamplesDropdown.AddOptions(PREDEFINED_SAMPLE_COORDINATES.Keys.ToList());
@@ -160,6 +163,8 @@ public class IntroductionSceneManager : MonoBehaviour
                 StartLongitudeInputField.interactable = false;
             }
         });
+        StartSamplesDropdown.value = PREDEFINED_SAMPLE_COORDINATES.Keys.ToList()
+            .IndexOf(PathsScriptableObject.StartLabel) + 1;
 
         // Display samples in end dropdown
         EndSamplesDropdown.AddOptions(new List<string> { "Custom" });
@@ -186,6 +191,8 @@ public class IntroductionSceneManager : MonoBehaviour
                 EndLongitudeInputField.interactable = false;
             }
         });
+        EndSamplesDropdown.value = PREDEFINED_SAMPLE_COORDINATES.Keys.ToList()
+            .IndexOf(PathsScriptableObject.EndLabel) + 1;
     }
 
     /// <summary>
