@@ -16,7 +16,7 @@ namespace SphericalPaths
         /// </summary>
         private void Awake()
         {
-            // Extract the radius of thye sphere
+            // Extract the radius of the sphere
             _Radius = SphereParent.transform.localScale.x;
 
             // Extract the material used on the sphere
