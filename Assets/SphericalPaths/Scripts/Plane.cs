@@ -89,6 +89,42 @@ namespace SphericalPaths
         [SerializeField]
         public float Intensity = 0.31f;
 
+
+
+        [Header("Points")]
+
+        /// <summary>
+        /// References the gameobject displays the points.
+        /// </summary>
+        [Tooltip("References the gameobject displays the points.")]
+        [SerializeField]
+        private GameObject PointsParent;
+
+        /// <summary>
+        /// References the template used when generating points.
+        /// </summary>
+        [Tooltip("References the template used when generating points.")]
+        [SerializeField]
+        private GameObject PointsTemplate;
+
+
+
+        [Header("Paths")]
+
+        /// <summary>
+        /// References the gameobject displays the paths.
+        /// </summary>
+        [Tooltip("References the gameobject displays the paths.")]
+        [SerializeField]
+        private GameObject PathsParent;
+
+        /// <summary>
+        /// References the template used when generating paths.
+        /// </summary>
+        [Tooltip("References the template used when generating paths.")]
+        [SerializeField]
+        private GameObject PathsTemplate;
+
         #endregion
 
     }
