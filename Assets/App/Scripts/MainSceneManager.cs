@@ -1,5 +1,6 @@
 using UnityEngine;
 using SphericalPaths.DataStructure;
+using UnityEngine.SceneManagement;
 
 public class MainSceneManager : MonoBehaviour
 {
@@ -35,6 +36,14 @@ public class MainSceneManager : MonoBehaviour
     #endregion
 
     #region Methods
+
+    /// <summary>
+    /// Switches back to the introduction scene.
+    /// </summary>
+    public void SwitchBackToIntroduction()
+    {
+        SceneManager.LoadScene("IntroductionScene", LoadSceneMode.Single);
+    }
 
     /// <summary>
     /// Generates a sample.
