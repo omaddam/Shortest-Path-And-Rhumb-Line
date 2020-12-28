@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace SphericalPaths
@@ -25,6 +26,17 @@ namespace SphericalPaths
             // Apply texture
             if (Texture != null)
                 PlaneMaterial.SetTexture("_MainTex", Texture);
+
+            // Extracts the lights inside the plane
+            PlaneLights = PlaneParent.GetComponentsInChildren<Light>()?.ToList();
+        }
+
+        /// <summary>
+        /// Continuously update the intensity of the plane.
+        /// </summary>
+        private void Update()
+        {
+            PlaneLights.ForEach(x => x.intensity = Intensity);
         }
 
         #endregion
@@ -63,6 +75,19 @@ namespace SphericalPaths
         [Tooltip("An optional texture that will be applied to the plane.")]
         [SerializeField]
         private Texture Texture;
+
+        /// <summary>
+        /// References the lights inside the plane.
+        /// </summary>
+        private List<Light> PlaneLights;
+
+        /// <summary>
+        /// The light intensity of the plane.
+        /// </summary>
+        [Tooltip("The light intensity of the plane.")]
+        [Range(0, 1)]
+        [SerializeField]
+        public float Intensity = 0.31f;
 
         #endregion
 
