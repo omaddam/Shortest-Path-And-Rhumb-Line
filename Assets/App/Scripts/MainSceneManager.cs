@@ -1,8 +1,44 @@
 using UnityEngine;
 using SphericalPaths.DataStructure;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainSceneManager : MonoBehaviour
 {
+
+    #region Constants
+
+    /// <summary>
+    /// The color used to display the start point.
+    /// </summary>
+    private static readonly Color START_POINT_COLOR = Color.blue;
+
+    /// <summary>
+    /// The color used to display the end point.
+    /// </summary>
+    private static readonly Color END_POINT_COLOR = Color.black;
+
+    /// <summary>
+    /// The color used to display the shortest path.
+    /// </summary>
+    private static readonly Color SHORTEST_PATH_COLOR = Color.red;
+
+    /// <summary>
+    /// The color used to display the rhumb path.
+    /// </summary>
+    private static readonly Color RHUMB_PATH_COLOR = Color.green;
+
+    /// <summary>
+    /// The light intensity applied to the sphere.
+    /// </summary>
+    private const float SPHERE_LIGHT_INTENSITY = 0.5f;
+
+    /// <summary>
+    /// The light intensity applied to the plane.
+    /// </summary>
+    private const float PLANE_LIGHT_INTENSITY = 0.7f;
+
+    #endregion
 
     #region Initialization
 
@@ -16,11 +52,44 @@ public class MainSceneManager : MonoBehaviour
         Plane.gameObject.SetActive(true);
         Sphere.gameObject.SetActive(false);
         Plane.gameObject.SetActive(false);
+
+        // Display path information
+        PathText.text = string.Format("{0} [Lat: {1:0.000}, Lon: {2:0.000}] to {3} [Lat: {4:0.000}, Lon: {5:0.000}]",
+            PathsScriptableObject.StartLabel,
+            PathsScriptableObject.StartCoordinates.CartesianCoordinates.y,
+            PathsScriptableObject.StartCoordinates.CartesianCoordinates.x,
+            PathsScriptableObject.EndLabel,
+            PathsScriptableObject.EndCoordinates.CartesianCoordinates.y,
+            PathsScriptableObject.EndCoordinates.CartesianCoordinates.x);
+
+        // Display the sphere
+        DisplaySphere();
     }
 
     #endregion
 
     #region Fields/Properties
+
+    /// <summary>
+    /// References the scriptable object that stores the demo information.
+    /// </summary>
+    [Tooltip("References the scriptable object that stores the demo information.")]
+    [SerializeField]
+    private PathManagerScriptableObject PathsScriptableObject;
+
+    /// <summary>
+    /// References the button that swithces between the sphere and plane view.
+    /// </summary>
+    [Tooltip("References the button that swithces between the sphere and plane view.")]
+    [SerializeField]
+    private Button SwitchButton;
+
+    /// <summary>
+    /// References the text that displays the path start/end point information.
+    /// </summary>
+    [Tooltip("References the text that displays the path start/end point information.")]
+    [SerializeField]
+    private Text PathText;
 
     /// <summary>
     /// References the sphere in the scene.
@@ -37,44 +106,91 @@ public class MainSceneManager : MonoBehaviour
     #region Methods
 
     /// <summary>
-    /// Generates a sample.
+    /// Switches back to the introduction scene.
     /// </summary>
-    private void GenerateSample()
+    public void SwitchBackToIntroduction()
     {
-        Coordinates northPole = new Coordinates(new Vector2(0, 90), Sphere.Radius, Plane.Width);
-        Coordinates calgary = new Coordinates(new Vector2(-114.0719f, 51.0447f), Sphere.Radius, Plane.Width);
-        Coordinates lebanon = new Coordinates(new Vector2(35.539267f, 33.893940f), Sphere.Radius, Plane.Width);
-        Coordinates london = new Coordinates(new Vector2(-0.104788f, 51.485530f), Sphere.Radius, Plane.Width);
-        Coordinates mecca = new Coordinates(new Vector2(39.826210f, 21.422486f), Sphere.Radius, Plane.Width);
+        SceneManager.LoadScene("IntroductionScene", LoadSceneMode.Single);
+    }
 
-        Plane.DisplayPoints(northPole, Color.green);
-        Plane.DisplayPoints(calgary, Color.red);
-        Plane.DisplayPoints(lebanon, Color.blue);
-        Plane.DisplayPoints(london, Color.gray);
-        Plane.DisplayPoints(mecca, Color.white);
+    /// <summary>
+    /// Switches between sphere and plane view.
+    /// </summary>
+    public void SwitchView()
+    {
+        if (Sphere.gameObject.activeSelf)
+            DisplayPlane();
+        else
+            DisplaySphere();
+    }
 
-        Sphere.DisplayPoints(northPole, Color.green);
-        Sphere.DisplayPoints(calgary, Color.red);
-        Sphere.DisplayPoints(lebanon, Color.blue);
-        Sphere.DisplayPoints(london, Color.gray);
-        Sphere.DisplayPoints(mecca, Color.white);
+    /// <summary>
+    /// Displays the points and paths on the sphere.
+    /// </summary>
+    private void DisplaySphere()
+    {
+        // Hide plane
+        Plane.gameObject.SetActive(false);
 
-        Path shortestPath = calgary.GetShortestPath(mecca);
-        Path directPath = calgary.GetRhumbPath(mecca);
+        // Show sphere
+        Sphere.gameObject.SetActive(true);
+        Sphere.transform.eulerAngles = Vector3.zero;
 
-        //Path shortestPath = lebanon.GetShortestPath(mecca);
-        //Path directPath = lebanon.GetRhumbPath(mecca);
+        // Clear everything displayed on the sphere
+        Sphere.ClearPoints();
+        Sphere.ClearPaths();
 
-        //Path shortestPath = london.GetShortestPath(mecca);
-        //Path directPath = london.GetRhumbPath(mecca);
+        // Set opacity
+        Sphere.Opacity = 1;
 
-        Plane.DisplayPaths(shortestPath, Color.red);
-        Plane.DisplayPaths(directPath, Color.green);
-        Sphere.DisplayPaths(shortestPath, Color.red);
-        Sphere.DisplayPaths(directPath, Color.green);
+        // Set light intensity
+        Sphere.Intensity = SPHERE_LIGHT_INTENSITY;
 
+        // Display points
+        Sphere.DisplayPoints(PathsScriptableObject.StartCoordinates, START_POINT_COLOR);
+        Sphere.DisplayPoints(PathsScriptableObject.EndCoordinates, END_POINT_COLOR);
+
+        // Display paths
+        Sphere.DisplayPaths(PathsScriptableObject.ShortestPath, SHORTEST_PATH_COLOR);
+        Sphere.DisplayPaths(PathsScriptableObject.RhumbPath, RHUMB_PATH_COLOR);
+
+        // Focus on the start coordinates
         Sphere.GetComponent<SphericalPaths.SphereRotation>().Focus(
-            calgary.CartesianCoordinates.x, calgary.CartesianCoordinates.y);
+            PathsScriptableObject.StartCoordinates.CartesianCoordinates.x, 
+            PathsScriptableObject.StartCoordinates.CartesianCoordinates.y);
+
+        // Change switch button text
+        SwitchButton.GetComponentInChildren<Text>().text = "Switch to plane view";
+    }
+
+    /// <summary>
+    /// Displays the points and paths on the plane.
+    /// </summary>
+    private void DisplayPlane()
+    {
+        // Hide sphere
+        Sphere.gameObject.SetActive(false);
+
+        // Show plane
+        Plane.gameObject.SetActive(true);
+
+        // Clear everything displayed on the plane
+        Plane.ClearPoints();
+        Plane.ClearPaths();
+
+        // Set light intensity
+        Plane.Intensity = PLANE_LIGHT_INTENSITY;
+
+        // Display points
+        Plane.DisplayPoints(PathsScriptableObject.StartCoordinates, START_POINT_COLOR);
+        Plane.DisplayPoints(PathsScriptableObject.EndCoordinates, END_POINT_COLOR);
+
+        // Display paths
+        Plane.DisplayPaths(PathsScriptableObject.ShortestPath, SHORTEST_PATH_COLOR);
+        Plane.DisplayPaths(PathsScriptableObject.RhumbPath, RHUMB_PATH_COLOR);
+
+        // Change switch button text
+        SwitchButton.GetComponentInChildren<Text>().text = "Switch to sphere view";
     }
 
     #endregion
