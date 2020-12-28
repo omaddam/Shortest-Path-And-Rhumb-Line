@@ -19,7 +19,7 @@ public class IntroductionSceneManager : MonoBehaviour
     /// <summary>
     /// The width of the plane displaying the points and paths.
     /// </summary>
-    private const float PLANE_WIDTH = 5f;
+    private const float PLANE_WIDTH = 15f;
 
     /// <summary>
     /// Predefined list of coordinates.
