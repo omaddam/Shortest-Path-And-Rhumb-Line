@@ -55,9 +55,43 @@ namespace SphericalPaths
         /// </summary>
         private Vector3 OffsetRotation = new Vector3(0, 0, 0);
 
+        /// <summary>
+        /// The sensitivity of the rotation.
+        /// </summary>
+        [Tooltip("The sensitivity of the rotation.")]
+        [SerializeField]
+        public float RotationSpeed = 5;
+
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Rotate the sphere by dragging.
+        /// </summary>
+        private void Update()
+        {
+            // Check if user is left clicking and dragging
+            if (Input.GetMouseButton(0) || Input.GetAxis("Mouse ScrollWheel") != 0)
+            {
+                // Check if dragging left/right and up/down
+                if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
+                {
+                    Vector2 posChange = new Vector2
+                    (
+                        -Input.GetAxis("Mouse X") * RotationSpeed, 
+                        -Input.GetAxis("Mouse Y") * RotationSpeed
+                    );
+                    Longitude += posChange.x;
+                    Latitude += posChange.y;
+                }
+
+                // Ensure latitude remains between -90 and 90 degrees
+                Latitude = Mathf.Clamp(Latitude, -90f, 90f);
+
+                ApplyPositionToTransform();
+            }
+        }
 
         /// <summary>
         /// Focuses on a specific coordinates.
@@ -75,6 +109,9 @@ namespace SphericalPaths
         /// </summary>
         private void ApplyPositionToTransform()
         {
+            // Reset rotation
+            transform.eulerAngles = Vector3.zero;
+
             // Get spherical coordinates
             DataStructure.Coordinates coordinates = new DataStructure.Coordinates(new Vector2(Longitude, Latitude), 5);
 
