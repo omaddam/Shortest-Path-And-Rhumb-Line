@@ -5,6 +5,40 @@ using UnityEngine.SceneManagement;
 public class MainSceneManager : MonoBehaviour
 {
 
+    #region Constants
+
+    /// <summary>
+    /// The color used to display the start point.
+    /// </summary>
+    private static readonly Color START_POINT_COLOR = Color.green;
+
+    /// <summary>
+    /// The color used to display the end point.
+    /// </summary>
+    private static readonly Color END_POINT_COLOR = Color.red;
+
+    /// <summary>
+    /// The color used to display the shortest path.
+    /// </summary>
+    private static readonly Color SHORTEST_PATH_COLOR = Color.white;
+
+    /// <summary>
+    /// The color used to display the rhumb path.
+    /// </summary>
+    private static readonly Color RHUMB_PATH_COLOR = Color.blue;
+
+    /// <summary>
+    /// The light intensity applied to the sphere.
+    /// </summary>
+    private const float SPHERE_LIGHT_INTENSITY = 0.5f;
+
+    /// <summary>
+    /// The light intensity applied to the plane.
+    /// </summary>
+    private const float PLANE_LIGHT_INTENSITY = 0.7f;
+
+    #endregion
+
     #region Initialization
 
     /// <summary>
@@ -17,6 +51,9 @@ public class MainSceneManager : MonoBehaviour
         Plane.gameObject.SetActive(true);
         Sphere.gameObject.SetActive(false);
         Plane.gameObject.SetActive(false);
+
+        // Display the sphere
+        DisplaySphere();
     }
 
     #endregion
@@ -53,44 +90,38 @@ public class MainSceneManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Generates a sample.
+    /// Displays the points and paths on the sphere.
     /// </summary>
-    private void GenerateSample()
+    private void DisplaySphere()
     {
-        Coordinates northPole = new Coordinates(new Vector2(0, 90), Sphere.Radius, Plane.Width);
-        Coordinates calgary = new Coordinates(new Vector2(-114.0719f, 51.0447f), Sphere.Radius, Plane.Width);
-        Coordinates lebanon = new Coordinates(new Vector2(35.539267f, 33.893940f), Sphere.Radius, Plane.Width);
-        Coordinates london = new Coordinates(new Vector2(-0.104788f, 51.485530f), Sphere.Radius, Plane.Width);
-        Coordinates mecca = new Coordinates(new Vector2(39.826210f, 21.422486f), Sphere.Radius, Plane.Width);
+        // Hide plane
+        Plane.gameObject.SetActive(false);
 
-        Plane.DisplayPoints(northPole, Color.green);
-        Plane.DisplayPoints(calgary, Color.red);
-        Plane.DisplayPoints(lebanon, Color.blue);
-        Plane.DisplayPoints(london, Color.gray);
-        Plane.DisplayPoints(mecca, Color.white);
+        // Show sphere
+        Sphere.gameObject.SetActive(true);
 
-        Sphere.DisplayPoints(northPole, Color.green);
-        Sphere.DisplayPoints(calgary, Color.red);
-        Sphere.DisplayPoints(lebanon, Color.blue);
-        Sphere.DisplayPoints(london, Color.gray);
-        Sphere.DisplayPoints(mecca, Color.white);
+        // Clear everything displayed on the sphere
+        Sphere.ClearPoints();
+        Sphere.ClearPaths();
 
-        Path shortestPath = calgary.GetShortestPath(mecca);
-        Path directPath = calgary.GetRhumbPath(mecca);
+        // Set opacity
+        Sphere.Opacity = 1;
 
-        //Path shortestPath = lebanon.GetShortestPath(mecca);
-        //Path directPath = lebanon.GetRhumbPath(mecca);
+        // Set light intensity
+        Sphere.Intensity = SPHERE_LIGHT_INTENSITY;
 
-        //Path shortestPath = london.GetShortestPath(mecca);
-        //Path directPath = london.GetRhumbPath(mecca);
+        // Display points
+        Sphere.DisplayPoints(PathsScriptableObject.StartCoordinates, START_POINT_COLOR);
+        Sphere.DisplayPoints(PathsScriptableObject.EndCoordinates, END_POINT_COLOR);
 
-        Plane.DisplayPaths(shortestPath, Color.red);
-        Plane.DisplayPaths(directPath, Color.green);
-        Sphere.DisplayPaths(shortestPath, Color.red);
-        Sphere.DisplayPaths(directPath, Color.green);
+        // Display paths
+        Sphere.DisplayPaths(PathsScriptableObject.ShortestPath, SHORTEST_PATH_COLOR);
+        Sphere.DisplayPaths(PathsScriptableObject.RhumbPath, RHUMB_PATH_COLOR);
 
+        // Focus on the start coordinates
         Sphere.GetComponent<SphericalPaths.SphereRotation>().Focus(
-            calgary.CartesianCoordinates.x, calgary.CartesianCoordinates.y);
+            PathsScriptableObject.StartCoordinates.CartesianCoordinates.x, 
+            PathsScriptableObject.StartCoordinates.CartesianCoordinates.y);
     }
 
     #endregion
