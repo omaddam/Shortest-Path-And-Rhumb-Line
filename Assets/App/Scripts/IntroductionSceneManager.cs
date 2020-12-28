@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class IntroductionSceneManager : MonoBehaviour
@@ -44,6 +45,9 @@ public class IntroductionSceneManager : MonoBehaviour
     {
         // Display version
         VersionText.text = string.Format("Version: {0}", Application.version);
+
+        // Clear data
+        PathsScriptableObject.Clear();
 
         // Populate samples dropdowns
         PopulateCoordinatesSampleDropdown();
@@ -182,6 +186,38 @@ public class IntroductionSceneManager : MonoBehaviour
                 EndLongitudeInputField.interactable = false;
             }
         });
+    }
+
+    /// <summary>
+    /// Computes the paths and loads the main scene to visualize them.
+    /// </summary>
+    public void GeneratePaths()
+    {
+        // Get start coordinates
+        string startLabel = StartSamplesDropdown.options[StartSamplesDropdown.value].text;
+        float.TryParse(StartLongitudeInputField.text, out float startLongitude);
+        float.TryParse(StartLatitudeInputField.text, out float startLatitude);
+        Coordinates startCoordinates = new Coordinates(new Vector2(startLongitude, startLatitude), 
+            SPHERE_RADIUS, PLANE_WIDTH);
+
+        // Get end coordinates
+        string endLabel = EndSamplesDropdown.options[EndSamplesDropdown.value].text;
+        float.TryParse(EndLongitudeInputField.text, out float endLongitude);
+        float.TryParse(EndLatitudeInputField.text, out float endLatitude);
+        Coordinates endCoordinates = new Coordinates(new Vector2(endLongitude, endLatitude),
+            SPHERE_RADIUS, PLANE_WIDTH);
+
+        // Compute paths
+        Path shortestPath = startCoordinates.GetShortestPath(endCoordinates);
+        Path rhumbPath = startCoordinates.GetRhumbPath(endCoordinates);
+
+        // Store data
+        PathsScriptableObject.Set(startLabel, startCoordinates,
+            endLabel, endCoordinates,
+            shortestPath, rhumbPath);
+
+        // Switch to main scene
+        SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
     }
 
     #endregion
