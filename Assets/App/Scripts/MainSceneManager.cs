@@ -34,6 +34,9 @@ public class MainSceneManager : MonoBehaviour
 
         Sphere.DisplayPaths(shortestPath, Color.red);
         Sphere.DisplayPaths(directPath, Color.green);
+
+        Sphere.GetComponent<SphericalPaths.SphereRotation>().Focus(
+            calgary.CartesianCoordinates.x, calgary.CartesianCoordinates.y);
     }
 
     #endregion

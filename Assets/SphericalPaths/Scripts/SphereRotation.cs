@@ -9,7 +9,21 @@ namespace SphericalPaths
 
         #region Initialization
 
-
+        /// <summary>
+        /// Executes once on awake.
+        /// </summary>
+        private void Awake()
+        {
+            // Compute offset rotation
+            if (FocusAt != null)
+            {
+                GameObject temp = new GameObject();
+                temp.transform.parent = transform;
+                temp.transform.LookAt(FocusAt.transform);
+                OffsetRotation = -temp.transform.eulerAngles;
+                Destroy(temp);
+            }
+        }
 
         #endregion
 
@@ -28,6 +42,18 @@ namespace SphericalPaths
         [Tooltip("The latitude the sphere is currently focused on.")]
         [SerializeField]
         private float Latitude;
+
+        /// <summary>
+        /// The object used to set the focus angle.
+        /// </summary>
+        [Tooltip("The object used to set the focus angle.")]
+        [SerializeField]
+        private GameObject FocusAt;
+
+        /// <summary>
+        /// Offset rotation computed and then applied to target our focus object.
+        /// </summary>
+        private Vector3 OffsetRotation = new Vector3(0, 0, 0);
 
         #endregion
 
@@ -49,8 +75,27 @@ namespace SphericalPaths
         /// </summary>
         private void ApplyPositionToTransform()
         {
-            Quaternion rotation = Quaternion.Euler(Latitude, -Longitude, 0);
-            transform.rotation = rotation;
+            // Get spherical coordinates
+            DataStructure.Coordinates coordinates = new DataStructure.Coordinates(new Vector2(Longitude, Latitude), 5);
+
+            // Get current direction of the focus point
+            Vector3 currentDirection = coordinates.SphericalCoordinates;
+
+            // Compute rotation
+            GameObject temp = new GameObject();
+            temp.transform.localPosition = currentDirection;
+            temp.transform.forward = currentDirection;
+            Vector3 rotation = temp.transform.eulerAngles;
+            Destroy(temp);
+
+            // Apply rotation
+            transform.RotateAround(transform.position, transform.right, -rotation.x);
+            transform.RotateAround(transform.position, transform.up, -rotation.y);
+
+            // Apply offset rotation
+            transform.RotateAround(transform.position, Vector3.up, OffsetRotation.y);
+            transform.RotateAround(transform.position, Vector3.right, OffsetRotation.x);
+            transform.RotateAround(transform.position, Vector3.forward, OffsetRotation.z);
         }
 
         #endregion

@@ -257,6 +257,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1586351358629965773, guid: b2e5629ad7339d547b1a1d2d09b2299c, type: 3}
+      propertyPath: FocusAt
+      value: 
+      objectReference: {fileID: 963194225}
     - target: {fileID: 4661171419304343961, guid: b2e5629ad7339d547b1a1d2d09b2299c, type: 3}
       propertyPath: Texture
       value: 
