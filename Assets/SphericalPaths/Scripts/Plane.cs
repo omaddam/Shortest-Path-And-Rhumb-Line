@@ -1,3 +1,4 @@
+using SphericalPaths.DataStructure;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -124,6 +125,82 @@ namespace SphericalPaths
         [Tooltip("References the template used when generating paths.")]
         [SerializeField]
         private GameObject PathsTemplate;
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Clear all points.
+        /// </summary>
+        public void ClearPoints()
+        {
+            foreach (Transform entity in PointsParent.transform)
+                GameObject.Destroy(entity.gameObject);
+        }
+
+        /// <summary>
+        /// Appends a list of points to the sphere.
+        /// </summary>
+        public void DisplayPoints(List<Coordinates> coordinates, Color color)
+        {
+            foreach (var point in coordinates)
+            {
+                // Create a new entity instance
+                GameObject pointInstance = Instantiate(PointsTemplate, PointsParent.transform);
+
+                // Extract the script
+                Point script = pointInstance.GetComponent<Point>();
+
+                // Initialize data
+                script.Initialize(point, color, false);
+            }
+        }
+
+        /// <summary>
+        /// Appends a single point to the sphere.
+        /// </summary>
+        public void DisplayPoints(Coordinates coordinates, Color color)
+        {
+            DisplayPoints(new List<Coordinates>() { coordinates }, color);
+        }
+
+
+
+        /// <summary>
+        /// Clear all paths.
+        /// </summary>
+        public void ClearPaths()
+        {
+            foreach (Transform entity in PathsParent.transform)
+                GameObject.Destroy(entity.gameObject);
+        }
+
+        /// <summary>
+        /// Appends a list of paths to the sphere.
+        /// </summary>
+        public void DisplayPaths(List<DataStructure.Path> paths, Color color)
+        {
+            foreach (var path in paths)
+            {
+                // Create a new entity instance
+                GameObject pathInstance = Instantiate(PathsTemplate, PathsParent.transform);
+
+                // Extract the script
+                Path script = pathInstance.GetComponent<Path>();
+
+                // Initialize data
+                script.Initialize(path, color, false);
+            }
+        }
+
+        /// <summary>
+        /// Appends a single path to the sphere.
+        /// </summary>
+        public void DisplayPaths(DataStructure.Path path, Color color)
+        {
+            DisplayPaths(new List<DataStructure.Path>() { path }, color);
+        }
 
         #endregion
 
