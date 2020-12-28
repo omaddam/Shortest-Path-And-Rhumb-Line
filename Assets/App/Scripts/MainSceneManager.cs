@@ -11,6 +11,36 @@ public class MainSceneManager : MonoBehaviour
     /// </summary>
     private void Start()
     {
+        // Enable (to invoke the awake method) then disable them immediately
+        Sphere.gameObject.SetActive(true);
+        Plane.gameObject.SetActive(true);
+        Sphere.gameObject.SetActive(false);
+        Plane.gameObject.SetActive(false);
+    }
+
+    #endregion
+
+    #region Fields/Properties
+
+    /// <summary>
+    /// References the sphere in the scene.
+    /// </summary>
+    public SphericalPaths.Sphere Sphere;
+
+    /// <summary>
+    /// References the plane in the scene.
+    /// </summary>
+    public SphericalPaths.Plane Plane;
+
+    #endregion
+
+    #region Methods
+
+    /// <summary>
+    /// Generates a sample.
+    /// </summary>
+    private void GenerateSample()
+    {
         Coordinates northPole = new Coordinates(new Vector2(0, 90), Sphere.Radius, Plane.Width);
         Coordinates calgary = new Coordinates(new Vector2(-114.0719f, 51.0447f), Sphere.Radius, Plane.Width);
         Coordinates lebanon = new Coordinates(new Vector2(35.539267f, 33.893940f), Sphere.Radius, Plane.Width);
@@ -45,23 +75,7 @@ public class MainSceneManager : MonoBehaviour
 
         Sphere.GetComponent<SphericalPaths.SphereRotation>().Focus(
             calgary.CartesianCoordinates.x, calgary.CartesianCoordinates.y);
-
-        Sphere.gameObject.SetActive(false);
     }
-
-    #endregion
-
-    #region Fields/Properties
-
-    /// <summary>
-    /// References the sphere in the scene.
-    /// </summary>
-    public SphericalPaths.Sphere Sphere;
-
-    /// <summary>
-    /// References the plane in the scene.
-    /// </summary>
-    public SphericalPaths.Plane Plane;
 
     #endregion
 
