@@ -1,6 +1,7 @@
 using UnityEngine;
 using SphericalPaths.DataStructure;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainSceneManager : MonoBehaviour
 {
@@ -68,6 +69,13 @@ public class MainSceneManager : MonoBehaviour
     private PathManagerScriptableObject PathsScriptableObject;
 
     /// <summary>
+    /// References the button that swithces between the sphere and plane view.
+    /// </summary>
+    [Tooltip("References the button that swithces between the sphere and plane view.")]
+    [SerializeField]
+    private Button SwitchButton;
+
+    /// <summary>
     /// References the sphere in the scene.
     /// </summary>
     public SphericalPaths.Sphere Sphere;
@@ -87,6 +95,17 @@ public class MainSceneManager : MonoBehaviour
     public void SwitchBackToIntroduction()
     {
         SceneManager.LoadScene("IntroductionScene", LoadSceneMode.Single);
+    }
+
+    /// <summary>
+    /// Switches between sphere and plane view.
+    /// </summary>
+    public void SwitchView()
+    {
+        if (Sphere.gameObject.activeSelf)
+            DisplayPlane();
+        else
+            DisplaySphere();
     }
 
     /// <summary>
@@ -122,6 +141,9 @@ public class MainSceneManager : MonoBehaviour
         Sphere.GetComponent<SphericalPaths.SphereRotation>().Focus(
             PathsScriptableObject.StartCoordinates.CartesianCoordinates.x, 
             PathsScriptableObject.StartCoordinates.CartesianCoordinates.y);
+
+        // Change switch button text
+        SwitchButton.GetComponentInChildren<Text>().text = "Switch to plane view";
     }
 
     /// <summary>
@@ -149,6 +171,9 @@ public class MainSceneManager : MonoBehaviour
         // Display paths
         Plane.DisplayPaths(PathsScriptableObject.ShortestPath, SHORTEST_PATH_COLOR);
         Plane.DisplayPaths(PathsScriptableObject.RhumbPath, RHUMB_PATH_COLOR);
+
+        // Change switch button text
+        SwitchButton.GetComponentInChildren<Text>().text = "Switch to sphere view";
     }
 
     #endregion
