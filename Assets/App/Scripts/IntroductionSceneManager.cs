@@ -60,7 +60,14 @@ public class IntroductionSceneManager : MonoBehaviour
     [SerializeField]
     private Text VersionText;
 
+    /// <summary>
+    /// References the scriptable object that stores the demo information.
+    /// </summary>
+    [Tooltip("References the scriptable object that stores the demo information.")]
+    [SerializeField]
+    private PathManagerScriptableObject PathsScriptableObject;
 
+    
 
     [Header("Start Coordinates")]
 

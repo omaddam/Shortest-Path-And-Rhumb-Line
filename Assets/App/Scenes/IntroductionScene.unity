@@ -1096,6 +1096,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VersionText: {fileID: 211153059}
+  PathsScriptableObject: {fileID: 11400000, guid: e27bd0ba17891ff42af71e206b294455, type: 2}
   StartLatitudeInputField: {fileID: 2054000775}
   StartLongitudeInputField: {fileID: 679409897}
   StartSamplesDropdown: {fileID: 1938787814}
