@@ -48,6 +48,11 @@ public class MainSceneManager : MonoBehaviour
     /// </summary>
     public SphericalPaths.Sphere Sphere;
 
+    /// <summary>
+    /// References the plane in the scene.
+    /// </summary>
+    public SphericalPaths.Plane Plane;
+
     #endregion
 
 }
