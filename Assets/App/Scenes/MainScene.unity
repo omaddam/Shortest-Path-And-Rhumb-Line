@@ -273,6 +273,10 @@ PrefabInstance:
       propertyPath: Texture
       value: 
       objectReference: {fileID: 2800000, guid: 81762da60b013cd4d9c6192eec1d8114, type: 3}
+    - target: {fileID: 2274723645258117657, guid: 9ade48742e446ce41aa22c1fa222495a, type: 3}
+      propertyPath: Intensity
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 3036874306281483260, guid: 9ade48742e446ce41aa22c1fa222495a, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -348,7 +352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8649031173423809938, guid: b2e5629ad7339d547b1a1d2d09b2299c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8649031173423809939, guid: b2e5629ad7339d547b1a1d2d09b2299c, type: 3}
       propertyPath: m_RootOrder
