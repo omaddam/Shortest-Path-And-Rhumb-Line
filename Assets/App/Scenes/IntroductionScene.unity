@@ -1096,6 +1096,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VersionText: {fileID: 211153059}
+  StartLatitudeInputField: {fileID: 2054000775}
+  StartLongitudeInputField: {fileID: 679409897}
+  StartSamplesDropdown: {fileID: 1938787814}
 --- !u!1 &547317190
 GameObject:
   m_ObjectHideFlags: 0

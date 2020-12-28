@@ -24,9 +24,34 @@ public class IntroductionSceneManager : MonoBehaviour
     /// <summary>
     /// References the text UI element that displays the verison of the application.
     /// </summary>
-    [Tooltip("References the text UI element that displays the verison of the application.")]
+    [Tooltip("References the text UI element that displays the version of the application.")]
     [SerializeField]
     private Text VersionText;
+
+
+
+    [Header("Start Coordinates")]
+
+    /// <summary>
+    /// References the input field UI element that contains the latitude.
+    /// </summary>
+    [Tooltip("References the input field UI element that contains the latitude.")]
+    [SerializeField]
+    private InputField StartLatitudeInputField;
+
+    /// <summary>
+    /// References the input field UI element that contains the longitude.
+    /// </summary>
+    [Tooltip("References the input field UI element that contains the longitude.")]
+    [SerializeField]
+    private InputField StartLongitudeInputField;
+
+    /// <summary>
+    /// References the dropdown UI element that contains the samples.
+    /// </summary>
+    [Tooltip("References the dropdown UI element that contains the samples.")]
+    [SerializeField]
+    private Dropdown StartSamplesDropdown;
 
     #endregion
 
