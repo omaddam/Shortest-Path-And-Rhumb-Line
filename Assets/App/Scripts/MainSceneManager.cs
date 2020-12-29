@@ -47,6 +47,12 @@ public class MainSceneManager : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+        // Update legends colors
+        StartPointImage.color = START_POINT_COLOR;
+        EndPointImage.color = END_POINT_COLOR;
+        ShortestPathImage.color = SHORTEST_PATH_COLOR;
+        RhumbLineImage.color = RHUMB_PATH_COLOR;
+
         // Enable (to invoke the awake method) then disable them immediately
         Sphere.gameObject.SetActive(true);
         Plane.gameObject.SetActive(true);
