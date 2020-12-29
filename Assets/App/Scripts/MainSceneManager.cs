@@ -88,6 +88,38 @@ public class MainSceneManager : MonoBehaviour
 
 
 
+    [Header("Legends")]
+
+    /// <summary>
+    /// References the image UI that displays the color of the start point pin.
+    /// </summary>
+    [Tooltip("References the image UI that displays the color of the start point pin.")]
+    [SerializeField]
+    private Image StartPointImage;
+
+    /// <summary>
+    /// References the image UI that displays the color of the end point pin.
+    /// </summary>
+    [Tooltip("References the image UI that displays the color of the end point pin.")]
+    [SerializeField]
+    private Image EndPointImage;
+
+    /// <summary>
+    /// References the image UI that displays the color of the shortest path.
+    /// </summary>
+    [Tooltip("References the image UI that displays the color of the shortest path.")]
+    [SerializeField]
+    private Image ShortestPathImage;
+
+    /// <summary>
+    /// References the image UI that displays the color of the rhumb path.
+    /// </summary>
+    [Tooltip("References the image UI that displays the color of the rhumb path.")]
+    [SerializeField]
+    private Image RhumbLineImage;
+
+
+
     [Header("Views")]
 
     /// <summary>

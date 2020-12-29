@@ -1454,8 +1454,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PathsScriptableObject: {fileID: 11400000, guid: e27bd0ba17891ff42af71e206b294455, type: 2}
-  SwitchButton: {fileID: 1991097191}
   PathText: {fileID: 991785128}
+  StartPointImage: {fileID: 679453572}
+  EndPointImage: {fileID: 1781148911}
+  ShortestPathImage: {fileID: 1026554347}
+  RhumbLineImage: {fileID: 788032922}
+  SwitchButton: {fileID: 1991097191}
   Sphere: {fileID: 8649031174807674473}
   Plane: {fileID: 117784886}
 --- !u!1 &1343820653
