@@ -70,6 +70,8 @@ public class MainSceneManager : MonoBehaviour
 
     #region Fields/Properties
 
+    [Header("Paths")]
+
     /// <summary>
     /// References the scriptable object that stores the demo information.
     /// </summary>
@@ -78,18 +80,22 @@ public class MainSceneManager : MonoBehaviour
     private PathManagerScriptableObject PathsScriptableObject;
 
     /// <summary>
-    /// References the button that swithces between the sphere and plane view.
-    /// </summary>
-    [Tooltip("References the button that swithces between the sphere and plane view.")]
-    [SerializeField]
-    private Button SwitchButton;
-
-    /// <summary>
     /// References the text that displays the path start/end point information.
     /// </summary>
     [Tooltip("References the text that displays the path start/end point information.")]
     [SerializeField]
     private Text PathText;
+
+
+
+    [Header("Views")]
+
+    /// <summary>
+    /// References the button that swithces between the sphere and plane view.
+    /// </summary>
+    [Tooltip("References the button that swithces between the sphere and plane view.")]
+    [SerializeField]
+    private Button SwitchButton;
 
     /// <summary>
     /// References the sphere in the scene.
