@@ -38,6 +38,22 @@ public class MainSceneManager : MonoBehaviour
     /// </summary>
     private const float PLANE_LIGHT_INTENSITY = 0.7f;
 
+#if !UNITY_EDITOR && UNITY_WEBGL
+
+    /// <summary>
+    /// The speed of sphere rotation upon dragging.
+    /// </summary>
+    private const float SPHERE_ROTATION_SPEED = 3f;
+
+#else
+
+    /// <summary>
+    /// The speed of sphere rotation upon dragging.
+    /// </summary>
+    private const float SPHERE_ROTATION_SPEED = 5f;
+
+#endif
+
     #endregion
 
     #region Initialization
@@ -52,6 +68,9 @@ public class MainSceneManager : MonoBehaviour
         EndPointImage.color = END_POINT_COLOR;
         ShortestPathImage.color = SHORTEST_PATH_COLOR;
         RhumbLineImage.color = RHUMB_PATH_COLOR;
+
+        // Set the sphere rotation speed
+        Sphere.GetComponent<SphericalPaths.SphereRotation>().RotationSpeed = SPHERE_ROTATION_SPEED;
 
         // Enable (to invoke the awake method) then disable them immediately
         Sphere.gameObject.SetActive(true);
