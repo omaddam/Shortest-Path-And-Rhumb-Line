@@ -163,8 +163,9 @@ public class IntroductionSceneManager : MonoBehaviour
                 StartLongitudeInputField.interactable = false;
             }
         });
-        StartSamplesDropdown.value = PREDEFINED_SAMPLE_COORDINATES.Keys.ToList()
-            .IndexOf(PathsScriptableObject.StartLabel) + 1;
+        StartSamplesDropdown.value = string.IsNullOrEmpty(PathsScriptableObject.StartLabel)
+            ? 2 // Calgary
+            : PREDEFINED_SAMPLE_COORDINATES.Keys.ToList().IndexOf(PathsScriptableObject.StartLabel) + 1;
 
         // Display samples in end dropdown
         EndSamplesDropdown.AddOptions(new List<string> { "Custom" });
@@ -191,8 +192,9 @@ public class IntroductionSceneManager : MonoBehaviour
                 EndLongitudeInputField.interactable = false;
             }
         });
-        EndSamplesDropdown.value = PREDEFINED_SAMPLE_COORDINATES.Keys.ToList()
-            .IndexOf(PathsScriptableObject.EndLabel) + 1;
+        EndSamplesDropdown.value = string.IsNullOrEmpty(PathsScriptableObject.EndLabel)
+            ? 5 // Mecca
+            : PREDEFINED_SAMPLE_COORDINATES.Keys.ToList().IndexOf(PathsScriptableObject.EndLabel) + 1;
     }
 
     /// <summary>
