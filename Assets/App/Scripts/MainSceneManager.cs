@@ -325,6 +325,9 @@ public class MainSceneManager : MonoBehaviour
 
         // Move the sphere
         Sphere.transform.position = new Vector3(SPHERE_TUTORIAL_X_OFFSET, Sphere.transform.position.y, 0);
+
+        // Start with the first step
+        ShowStep1InShortestPathTutorial();
     }
 
     /// <summary>
@@ -333,6 +336,38 @@ public class MainSceneManager : MonoBehaviour
     public void CancelShortestPathTutorial()
     {
         SwitchView(true);
+    }
+
+    /// <summary>
+    /// Displays the first step in the shoretst path tutorial.
+    /// </summary>
+    public void ShowStep1InShortestPathTutorial()
+    {
+
+    }
+
+    /// <summary>
+    /// Displays the second step in the shoretst path tutorial.
+    /// </summary>
+    public void ShowStep2InShortestPathTutorial()
+    {
+
+    }
+
+    /// <summary>
+    /// Displays the third step in the shoretst path tutorial.
+    /// </summary>
+    public void ShowStep3InShortestPathTutorial()
+    {
+
+    }
+
+    /// <summary>
+    /// Displays the fourth step in the shoretst path tutorial.
+    /// </summary>
+    public void ShowStep4InShortestPathTutorial()
+    {
+
     }
 
     #endregion
