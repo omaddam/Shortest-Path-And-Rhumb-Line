@@ -37,6 +37,16 @@ public class ShortestPathTutorialVisualizer : MonoBehaviour
     /// </summary>
     public SphericalPaths.Sphere Sphere;
 
+    /// <summary>
+    /// Stores the points on the straight line.
+    /// </summary>
+    private List<Vector3> PointsOnTheStraightLine;
+
+    /// <summary>
+    /// Stores the projected points on the sphere.
+    /// </summary>
+    private List<Vector3> PointsOnTheSphere;
+
     #endregion
 
     #region Methods
@@ -88,20 +98,18 @@ public class ShortestPathTutorialVisualizer : MonoBehaviour
     private void DisplayStep2()
     {
         // Compute the points on the straight line
-        List<Vector3> points = SphericalPaths.DataStructure.PathComputationMethods.GetStraightLine
+        PointsOnTheStraightLine = SphericalPaths.DataStructure.PathComputationMethods.GetStraightLine
         (
             PathsScriptableObject.StartCoordinates.SphericalCoordinates,
             PathsScriptableObject.EndCoordinates.SphericalCoordinates,
             15
         );
-        points.Insert(0, PathsScriptableObject.StartCoordinates.SphericalCoordinates);
-        points.Add(PathsScriptableObject.EndCoordinates.SphericalCoordinates);
 
         // TODO: Display each point on the straight line
 
         // Connect the points to the center of the sphere
         List<SphericalPaths.DataStructure.Path> paths = new List<SphericalPaths.DataStructure.Path>();
-        foreach (var point in points)
+        foreach (var point in PointsOnTheStraightLine)
             paths.Add(new SphericalPaths.DataStructure.Path
             (
                 new List<SphericalPaths.DataStructure.Coordinates>
@@ -110,6 +118,22 @@ public class ShortestPathTutorialVisualizer : MonoBehaviour
                     new SphericalPaths.DataStructure.Coordinates(Vector3.zero, PathsScriptableObject.StartCoordinates.Radius, PathsScriptableObject.StartCoordinates.Width)
                 }
             ));
+        paths.Add(new SphericalPaths.DataStructure.Path
+        (
+            new List<SphericalPaths.DataStructure.Coordinates>
+            {
+                PathsScriptableObject.StartCoordinates,
+                new SphericalPaths.DataStructure.Coordinates(Vector3.zero, PathsScriptableObject.StartCoordinates.Radius, PathsScriptableObject.StartCoordinates.Width)
+            }
+        ));
+        paths.Add(new SphericalPaths.DataStructure.Path
+        (
+            new List<SphericalPaths.DataStructure.Coordinates>
+            {
+                PathsScriptableObject.EndCoordinates,
+                new SphericalPaths.DataStructure.Coordinates(Vector3.zero, PathsScriptableObject.StartCoordinates.Radius, PathsScriptableObject.StartCoordinates.Width)
+            }
+        ));
         Sphere.DisplayPaths(paths, CONNECTING_LINE_COLOR);
     }
 
@@ -118,33 +142,27 @@ public class ShortestPathTutorialVisualizer : MonoBehaviour
     /// </summary>
     private void DisplayStep3()
     {
-        // Compute the points on the straight line
-        List<Vector3> points = SphericalPaths.DataStructure.PathComputationMethods.GetStraightLine
-        (
-            PathsScriptableObject.StartCoordinates.SphericalCoordinates,
-            PathsScriptableObject.EndCoordinates.SphericalCoordinates,
-            15
-        );
-
         // Compute the points on the arc
-        List<Vector3> arc = SphericalPaths.DataStructure.PathComputationMethods.ProjectPointsOnSphere
+        PointsOnTheSphere = SphericalPaths.DataStructure.PathComputationMethods.ProjectPointsOnSphere
         (
-            points,
+            PointsOnTheStraightLine,
             PathsScriptableObject.StartCoordinates.Radius
         );
 
         // Connect the points on the straight line to their projection
         List<SphericalPaths.DataStructure.Path> paths = new List<SphericalPaths.DataStructure.Path>();
-        for (int i = 0; i < points.Count; i++)
+        for (int i = 0; i < PointsOnTheStraightLine.Count; i++)
             paths.Add(new SphericalPaths.DataStructure.Path
             (
                 new List<SphericalPaths.DataStructure.Coordinates>
                 {
-                    new SphericalPaths.DataStructure.Coordinates(points[i], PathsScriptableObject.StartCoordinates.Radius, PathsScriptableObject.StartCoordinates.Width),
-                    new SphericalPaths.DataStructure.Coordinates(arc[i], PathsScriptableObject.StartCoordinates.Radius, PathsScriptableObject.StartCoordinates.Width)
+                    new SphericalPaths.DataStructure.Coordinates(PointsOnTheStraightLine[i], PathsScriptableObject.StartCoordinates.Radius, PathsScriptableObject.StartCoordinates.Width),
+                    new SphericalPaths.DataStructure.Coordinates(PointsOnTheSphere[i], PathsScriptableObject.StartCoordinates.Radius, PathsScriptableObject.StartCoordinates.Width)
                 }
             )); 
         Sphere.DisplayPaths(paths, PROJECTION_LINE_COLOR);
+
+        // TODO: Display spheres to represent the projected points
     }
 
     /// <summary>
