@@ -327,19 +327,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 41378672}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1321234381}
-        m_TargetAssemblyTypeName: MainSceneManager, Assembly-CSharp
-        m_MethodName: StartShortestPathTutorial
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &41378672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -460,19 +448,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 66758033}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1321234381}
-        m_TargetAssemblyTypeName: MainSceneManager, Assembly-CSharp
-        m_MethodName: ShowStep4InShortestPathTutorial
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &66758033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -661,7 +637,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Connect all projected points on the sphere to form an arc (the shortest
-    path)
+    path).
 --- !u!222 &108679971
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1612,6 +1588,7 @@ GameObject:
   m_Component:
   - component: {fileID: 631313195}
   - component: {fileID: 631313197}
+  - component: {fileID: 631313196}
   m_Layer: 5
   m_Name: ShortestPathTutorial
   m_TagString: Untagged
@@ -1640,6 +1617,35 @@ RectTransform:
   m_AnchoredPosition: {x: -135, y: -350}
   m_SizeDelta: {x: 250, y: 560}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &631313196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631313194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4edcafa10434f174fa1df55dc5286499, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnChange:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCancel:
+    m_PersistentCalls:
+      m_Calls: []
+  TeaserPanel: {fileID: 811169140}
+  TutorialPanel: {fileID: 2051791264}
+  StartButton: {fileID: 41378671}
+  CancelButton: {fileID: 710596646}
+  Step1Button: {fileID: 731114462}
+  Step2Button: {fileID: 1088007807}
+  Step3Button: {fileID: 1547149944}
+  Step4Button: {fileID: 66758032}
 --- !u!222 &631313197
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2171,19 +2177,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 731114463}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1321234381}
-        m_TargetAssemblyTypeName: MainSceneManager, Assembly-CSharp
-        m_MethodName: ShowStep1InShortestPathTutorial
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &731114463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3073,19 +3067,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1088007808}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1321234381}
-        m_TargetAssemblyTypeName: MainSceneManager, Assembly-CSharp
-        m_MethodName: ShowStep2InShortestPathTutorial
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1088007808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3364,17 +3346,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PathsScriptableObject: {fileID: 11400000, guid: e27bd0ba17891ff42af71e206b294455, type: 2}
   PathText: {fileID: 991785128}
-  LegendsUI: {fileID: 2009223568}
   SwitchButton: {fileID: 1991097191}
   Sphere: {fileID: 8649031174807674473}
   Plane: {fileID: 117784886}
-  ShortestPathTutorialParentPanel: {fileID: 631313194}
-  ShortestPathTutorialTeaserPanel: {fileID: 811169140}
-  ShortestPathTutorialPanel: {fileID: 2051791264}
-  ShortestPathButton1: {fileID: 731114462}
-  ShortestPathButton2: {fileID: 1088007807}
-  ShortestPathButton3: {fileID: 1547149944}
-  ShortestPathButton4: {fileID: 66758032}
+  LegendsUI: {fileID: 2009223568}
+  ShortestPathTutorialUI: {fileID: 631313196}
 --- !u!1 &1334630577
 GameObject:
   m_ObjectHideFlags: 0
@@ -3720,19 +3696,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1547149945}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1321234381}
-        m_TargetAssemblyTypeName: MainSceneManager, Assembly-CSharp
-        m_MethodName: ShowStep3InShortestPathTutorial
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1547149945
 MonoBehaviour:
   m_ObjectHideFlags: 0
