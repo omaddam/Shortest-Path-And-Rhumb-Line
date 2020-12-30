@@ -192,11 +192,30 @@ public class MainSceneManager : MonoBehaviour
     /// </summary>
     public void SwitchView()
     {
+        // Show plane view
         if (Sphere.gameObject.activeSelf)
+        {
+            // Hide the sphere, show the plane, and display the two paths
             DisplayPlane();
+
+            // Hide the shortest path tutorial
+            ShortestPathTutorialPanel.SetActive(false);
+        }
+
+        // Show sphere view
         else
+        {
+            // Hide the plane, show the sphere, and display the two paths
             DisplaySphere();
+
+            // Display the shortest path tutorial teaser
+            DisplayShortestPathTutorial();
+        }
     }
+
+    #endregion
+
+    #region Sphere Methods
 
     /// <summary>
     /// Displays the points and paths on the sphere.
@@ -230,12 +249,29 @@ public class MainSceneManager : MonoBehaviour
 
         // Focus on the start coordinates
         Sphere.GetComponent<SphericalPaths.SphereRotation>().Focus(
-            PathsScriptableObject.StartCoordinates.CartesianCoordinates.x, 
+            PathsScriptableObject.StartCoordinates.CartesianCoordinates.x,
             PathsScriptableObject.StartCoordinates.CartesianCoordinates.y);
 
         // Change switch button text
         SwitchButton.GetComponentInChildren<Text>().text = "Switch to plane view";
     }
+
+    /// <summary>
+    /// Show the menu that allows the user to start the shortest path tutorial.
+    /// </summary>
+    private void DisplayShortestPathTutorial()
+    {
+        // Display the parent panel
+        ShortestPathTutorialPanel.SetActive(true);
+
+        // TODO: Hide the tutorial
+
+        // TODO: Show the teaser
+    }
+
+    #endregion
+
+    #region Plane Methods
 
     /// <summary>
     /// Displays the points and paths on the plane.
