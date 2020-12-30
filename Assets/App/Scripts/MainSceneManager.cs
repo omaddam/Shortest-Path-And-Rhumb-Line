@@ -164,6 +164,17 @@ public class MainSceneManager : MonoBehaviour
     /// </summary>
     public SphericalPaths.Plane Plane;
 
+
+
+    [Header("Shortest Path Tutorial")]
+
+    /// <summary>
+    /// References the planel that holds the shortest path tutorial.
+    /// </summary>
+    [Tooltip("References the planel that holds the shortest path tutorial.")]
+    [SerializeField]
+    public GameObject ShortestPathTutorialPanel;
+
     #endregion
 
     #region Methods
