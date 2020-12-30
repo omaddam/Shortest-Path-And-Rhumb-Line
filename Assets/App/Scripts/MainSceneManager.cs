@@ -64,6 +64,21 @@ public class MainSceneManager : MonoBehaviour
     /// </summary>
     private const float SPHERE_TUTORIAL_X_OFFSET = -1f;
 
+    /// <summary>
+    /// The color applied to the button of current step.
+    /// </summary>
+    private static readonly Color SHORTEST_PATH_TUTORIAL_BUTTON_CURRENT_COLOR = Color.yellow;
+
+    /// <summary>
+    /// The color applied to the buttons of completed steps.
+    /// </summary>
+    private static readonly Color SHORTEST_PATH_TUTORIAL_BUTTON_COMPLETED_COLOR = Color.green;
+
+    /// <summary>
+    /// The color applied to the buttons of pending steps.
+    /// </summary>
+    private static readonly Color SHORTEST_PATH_TUTORIAL_BUTTON_PENDING_COLOR = Color.white;
+
     #endregion
 
     #region Initialization
@@ -371,7 +386,11 @@ public class MainSceneManager : MonoBehaviour
     /// </summary>
     public void ShowStep1InShortestPathTutorial()
     {
-
+        // Change the colors
+        ShortestPathButton1.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_CURRENT_COLOR;
+        ShortestPathButton2.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_PENDING_COLOR;
+        ShortestPathButton3.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_PENDING_COLOR;
+        ShortestPathButton4.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_PENDING_COLOR;
     }
 
     /// <summary>
@@ -379,7 +398,11 @@ public class MainSceneManager : MonoBehaviour
     /// </summary>
     public void ShowStep2InShortestPathTutorial()
     {
-
+        // Change the colors
+        ShortestPathButton1.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_COMPLETED_COLOR;
+        ShortestPathButton2.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_CURRENT_COLOR;
+        ShortestPathButton3.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_PENDING_COLOR;
+        ShortestPathButton4.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_PENDING_COLOR;
     }
 
     /// <summary>
@@ -387,7 +410,11 @@ public class MainSceneManager : MonoBehaviour
     /// </summary>
     public void ShowStep3InShortestPathTutorial()
     {
-
+        // Change the colors
+        ShortestPathButton1.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_COMPLETED_COLOR;
+        ShortestPathButton2.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_COMPLETED_COLOR;
+        ShortestPathButton3.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_CURRENT_COLOR;
+        ShortestPathButton4.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_PENDING_COLOR;
     }
 
     /// <summary>
@@ -395,7 +422,11 @@ public class MainSceneManager : MonoBehaviour
     /// </summary>
     public void ShowStep4InShortestPathTutorial()
     {
-
+        // Change the colors
+        ShortestPathButton1.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_COMPLETED_COLOR;
+        ShortestPathButton2.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_COMPLETED_COLOR;
+        ShortestPathButton3.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_COMPLETED_COLOR;
+        ShortestPathButton4.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_CURRENT_COLOR;
     }
 
     #endregion
