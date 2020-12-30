@@ -129,6 +129,17 @@ public class MainSceneManager : MonoBehaviour
 
 
 
+    [Header("Tutorials")]
+
+    /// <summary>
+    /// References ths visualizer that will display the shortest path tutorial.
+    /// </summary>
+    [Tooltip("References ths visualizer that will display the shortest path tutorial.")]
+    [SerializeField]
+    private ShortestPathTutorialVisualizer ShortestPathTutorialVisualizer;
+
+
+
     [Header("UI Managers")]
 
     /// <summary>
