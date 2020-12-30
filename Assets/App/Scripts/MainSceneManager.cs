@@ -173,6 +173,20 @@ public class MainSceneManager : MonoBehaviour
     /// </summary>
     [Tooltip("References the planel that holds the shortest path tutorial.")]
     [SerializeField]
+    public GameObject ShortestPathTutorialParentPanel;
+
+    /// <summary>
+    /// References the planel that holds the teaser for shortest path tutorial.
+    /// </summary>
+    [Tooltip("References the planel that holds the teaser for shortest path tutorial.")]
+    [SerializeField]
+    public GameObject ShortestPathTutorialTeaserPanel;
+
+    /// <summary>
+    /// References the planel that holds the actual tutorial.
+    /// </summary>
+    [Tooltip("References the planel that holds the actual tutorial.")]
+    [SerializeField]
     public GameObject ShortestPathTutorialPanel;
 
     #endregion
