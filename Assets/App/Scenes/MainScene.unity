@@ -3374,6 +3374,10 @@ MonoBehaviour:
   ShortestPathTutorialParentPanel: {fileID: 631313194}
   ShortestPathTutorialTeaserPanel: {fileID: 811169140}
   ShortestPathTutorialPanel: {fileID: 2051791264}
+  ShortestPathButton1: {fileID: 731114462}
+  ShortestPathButton2: {fileID: 1088007807}
+  ShortestPathButton3: {fileID: 1547149944}
+  ShortestPathButton4: {fileID: 66758032}
 --- !u!1 &1334630577
 GameObject:
   m_ObjectHideFlags: 0

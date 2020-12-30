@@ -183,21 +183,49 @@ public class MainSceneManager : MonoBehaviour
     /// </summary>
     [Tooltip("References the planel that holds the shortest path tutorial.")]
     [SerializeField]
-    public GameObject ShortestPathTutorialParentPanel;
+    private GameObject ShortestPathTutorialParentPanel;
 
     /// <summary>
     /// References the planel that holds the teaser for shortest path tutorial.
     /// </summary>
     [Tooltip("References the planel that holds the teaser for shortest path tutorial.")]
     [SerializeField]
-    public GameObject ShortestPathTutorialTeaserPanel;
+    private GameObject ShortestPathTutorialTeaserPanel;
 
     /// <summary>
     /// References the planel that holds the actual tutorial.
     /// </summary>
     [Tooltip("References the planel that holds the actual tutorial.")]
     [SerializeField]
-    public GameObject ShortestPathTutorialPanel;
+    private GameObject ShortestPathTutorialPanel;
+
+    /// <summary>
+    /// References the button in the first step of the shortest path tutorial.
+    /// </summary>
+    [Tooltip("References the button in the first step of the shortest path tutorial.")]
+    [SerializeField]
+    private Button ShortestPathButton1;
+
+    /// <summary>
+    /// References the button in the second step of the shortest path tutorial.
+    /// </summary>
+    [Tooltip("References the button in the second step of the shortest path tutorial.")]
+    [SerializeField]
+    private Button ShortestPathButton2;
+
+    /// <summary>
+    /// References the button in the third step of the shortest path tutorial.
+    /// </summary>
+    [Tooltip("References the button in the third step of the shortest path tutorial.")]
+    [SerializeField]
+    private Button ShortestPathButton3;
+
+    /// <summary>
+    /// References the button in the fourth step of the shortest path tutorial.
+    /// </summary>
+    [Tooltip("References the button in the fourth step of the shortest path tutorial.")]
+    [SerializeField]
+    private Button ShortestPathButton4;
 
     #endregion
 
