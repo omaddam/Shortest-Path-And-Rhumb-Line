@@ -16,6 +16,11 @@ public class ShortestPathTutorialVisualizer : MonoBehaviour
     /// </summary>
     private static readonly Color CONNECTING_LINE_COLOR = Color.magenta;
 
+    /// <summary>
+    /// The color of the lines projecting the points from the straight line to the sphere.
+    /// </summary>
+    private static readonly Color PROJECTION_LINE_COLOR = Color.magenta;
+
     #endregion
 
     #region Fields/Properties
@@ -109,11 +114,37 @@ public class ShortestPathTutorialVisualizer : MonoBehaviour
     }
 
     /// <summary>
-    /// Displays the thjird step in the tutorial.
+    /// Displays the third step in the tutorial.
     /// </summary>
     private void DisplayStep3()
     {
+        // Compute the points on the straight line
+        List<Vector3> points = SphericalPaths.DataStructure.PathComputationMethods.GetStraightLine
+        (
+            PathsScriptableObject.StartCoordinates.SphericalCoordinates,
+            PathsScriptableObject.EndCoordinates.SphericalCoordinates,
+            15
+        );
 
+        // Compute the points on the arc
+        List<Vector3> arc = SphericalPaths.DataStructure.PathComputationMethods.ProjectPointsOnSphere
+        (
+            points,
+            PathsScriptableObject.StartCoordinates.Radius
+        );
+
+        // Connect the points on the straight line to their projection
+        List<SphericalPaths.DataStructure.Path> paths = new List<SphericalPaths.DataStructure.Path>();
+        for (int i = 0; i < points.Count; i++)
+            paths.Add(new SphericalPaths.DataStructure.Path
+            (
+                new List<SphericalPaths.DataStructure.Coordinates>
+                {
+                    new SphericalPaths.DataStructure.Coordinates(points[i], PathsScriptableObject.StartCoordinates.Radius, PathsScriptableObject.StartCoordinates.Width),
+                    new SphericalPaths.DataStructure.Coordinates(arc[i], PathsScriptableObject.StartCoordinates.Radius, PathsScriptableObject.StartCoordinates.Width)
+                }
+            )); 
+        Sphere.DisplayPaths(paths, PROJECTION_LINE_COLOR);
     }
 
     /// <summary>
