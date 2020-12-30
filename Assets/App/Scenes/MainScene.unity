@@ -3325,6 +3325,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1321234380}
   - component: {fileID: 1321234381}
+  - component: {fileID: 1321234382}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -3362,8 +3363,23 @@ MonoBehaviour:
   SwitchButton: {fileID: 1991097191}
   Sphere: {fileID: 8649031174807674473}
   Plane: {fileID: 117784886}
+  ShortestPathTutorialVisualizer: {fileID: 1321234382}
   LegendsUI: {fileID: 2009223568}
   ShortestPathTutorialUI: {fileID: 631313196}
+--- !u!114 &1321234382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1321234379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ca45388cbbf3ec4cad7ecc6f3932449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PathsScriptableObject: {fileID: 11400000, guid: e27bd0ba17891ff42af71e206b294455, type: 2}
+  Sphere: {fileID: 8649031174807674473}
 --- !u!1 &1334630577
 GameObject:
   m_ObjectHideFlags: 0
