@@ -275,7 +275,7 @@ public class MainSceneManager : MonoBehaviour
         // Handle tutorial step change
         ShortestPathTutorialUI.OnChange.AddListener(() =>
         {
-            // TODO: display the step on the sphere
+            ShortestPathTutorialVisualizer.Display(ShortestPathTutorialUI.CurrentStep);
         });
     }
 
