@@ -64,21 +64,6 @@ public class MainSceneManager : MonoBehaviour
     /// </summary>
     private const float SPHERE_TUTORIAL_X_OFFSET = -1f;
 
-    /// <summary>
-    /// The color applied to the button of current step.
-    /// </summary>
-    private static readonly Color SHORTEST_PATH_TUTORIAL_BUTTON_CURRENT_COLOR = Color.yellow;
-
-    /// <summary>
-    /// The color applied to the buttons of completed steps.
-    /// </summary>
-    private static readonly Color SHORTEST_PATH_TUTORIAL_BUTTON_COMPLETED_COLOR = Color.green;
-
-    /// <summary>
-    /// The color applied to the buttons of pending steps.
-    /// </summary>
-    private static readonly Color SHORTEST_PATH_TUTORIAL_BUTTON_PENDING_COLOR = Color.white;
-
     #endregion
 
     #region Initialization
@@ -88,11 +73,9 @@ public class MainSceneManager : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        // Update legends colors
-        StartPointImage.color = START_POINT_COLOR;
-        EndPointImage.color = END_POINT_COLOR;
-        ShortestPathImage.color = SHORTEST_PATH_COLOR;
-        RhumbLineImage.color = RHUMB_PATH_COLOR;
+        // Update legend colors
+        LegendsUI.Initialize(START_POINT_COLOR, END_POINT_COLOR,
+            SHORTEST_PATH_COLOR, RHUMB_PATH_COLOR);
 
         // Set the sphere rotation speed
         Sphere.GetComponent<SphericalPaths.SphereRotation>().RotationSpeed = SPHERE_ROTATION_SPEED;
@@ -103,14 +86,8 @@ public class MainSceneManager : MonoBehaviour
         Sphere.gameObject.SetActive(false);
         Plane.gameObject.SetActive(false);
 
-        // Display path information
-        PathText.text = string.Format("{0} [Lat: {1:0.000}, Lon: {2:0.000}] to {3} [Lat: {4:0.000}, Lon: {5:0.000}]",
-            PathsScriptableObject.StartLabel,
-            PathsScriptableObject.StartCoordinates.CartesianCoordinates.y,
-            PathsScriptableObject.StartCoordinates.CartesianCoordinates.x,
-            PathsScriptableObject.EndLabel,
-            PathsScriptableObject.EndCoordinates.CartesianCoordinates.y,
-            PathsScriptableObject.EndCoordinates.CartesianCoordinates.x);
+        // Initialize the shortest path tutorial
+        InitializeShortestPathTutorial();
 
         // Display the sphere
         SwitchView(true);
@@ -128,45 +105,6 @@ public class MainSceneManager : MonoBehaviour
     [Tooltip("References the scriptable object that stores the demo information.")]
     [SerializeField]
     private PathManagerScriptableObject PathsScriptableObject;
-
-    /// <summary>
-    /// References the text that displays the path start/end point information.
-    /// </summary>
-    [Tooltip("References the text that displays the path start/end point information.")]
-    [SerializeField]
-    private Text PathText;
-
-
-
-    [Header("Legends")]
-
-    /// <summary>
-    /// References the image UI that displays the color of the start point pin.
-    /// </summary>
-    [Tooltip("References the image UI that displays the color of the start point pin.")]
-    [SerializeField]
-    private Image StartPointImage;
-
-    /// <summary>
-    /// References the image UI that displays the color of the end point pin.
-    /// </summary>
-    [Tooltip("References the image UI that displays the color of the end point pin.")]
-    [SerializeField]
-    private Image EndPointImage;
-
-    /// <summary>
-    /// References the image UI that displays the color of the shortest path.
-    /// </summary>
-    [Tooltip("References the image UI that displays the color of the shortest path.")]
-    [SerializeField]
-    private Image ShortestPathImage;
-
-    /// <summary>
-    /// References the image UI that displays the color of the rhumb path.
-    /// </summary>
-    [Tooltip("References the image UI that displays the color of the rhumb path.")]
-    [SerializeField]
-    private Image RhumbLineImage;
 
 
 
@@ -191,56 +129,21 @@ public class MainSceneManager : MonoBehaviour
 
 
 
-    [Header("Shortest Path Tutorial")]
+    [Header("UI Managers")]
 
     /// <summary>
-    /// References the planel that holds the shortest path tutorial.
+    /// References the UI manager that displays the colors used in a legend.
     /// </summary>
-    [Tooltip("References the planel that holds the shortest path tutorial.")]
+    [Tooltip("References the UI manager that displays the colors used in a legend.")]
     [SerializeField]
-    private GameObject ShortestPathTutorialParentPanel;
+    private LegendsUIManager LegendsUI;
 
     /// <summary>
-    /// References the planel that holds the teaser for shortest path tutorial.
+    /// References the UI manager that displays the shortest path's tutorial.
     /// </summary>
-    [Tooltip("References the planel that holds the teaser for shortest path tutorial.")]
+    [Tooltip("References the UI manager that displays the shortest path's tutorial.")]
     [SerializeField]
-    private GameObject ShortestPathTutorialTeaserPanel;
-
-    /// <summary>
-    /// References the planel that holds the actual tutorial.
-    /// </summary>
-    [Tooltip("References the planel that holds the actual tutorial.")]
-    [SerializeField]
-    private GameObject ShortestPathTutorialPanel;
-
-    /// <summary>
-    /// References the button in the first step of the shortest path tutorial.
-    /// </summary>
-    [Tooltip("References the button in the first step of the shortest path tutorial.")]
-    [SerializeField]
-    private Button ShortestPathButton1;
-
-    /// <summary>
-    /// References the button in the second step of the shortest path tutorial.
-    /// </summary>
-    [Tooltip("References the button in the second step of the shortest path tutorial.")]
-    [SerializeField]
-    private Button ShortestPathButton2;
-
-    /// <summary>
-    /// References the button in the third step of the shortest path tutorial.
-    /// </summary>
-    [Tooltip("References the button in the third step of the shortest path tutorial.")]
-    [SerializeField]
-    private Button ShortestPathButton3;
-
-    /// <summary>
-    /// References the button in the fourth step of the shortest path tutorial.
-    /// </summary>
-    [Tooltip("References the button in the fourth step of the shortest path tutorial.")]
-    [SerializeField]
-    private Button ShortestPathButton4;
+    private ShortestPathTutorialUIManager ShortestPathTutorialUI;
 
     #endregion
 
@@ -277,7 +180,7 @@ public class MainSceneManager : MonoBehaviour
             DisplayPlane();
 
             // Hide the shortest path tutorial
-            ShortestPathTutorialParentPanel.SetActive(false);
+            ShortestPathTutorialUI.Hide();
         }
 
         // Show sphere view
@@ -286,8 +189,8 @@ public class MainSceneManager : MonoBehaviour
             // Hide the plane, show the sphere, and display the two paths
             DisplaySphere();
 
-            // Display the shortest path tutorial teaser
-            DisplayShortestPathTutorial();
+            // Display the shortest path tutorial
+            ShortestPathTutorialUI.Show();
         }
     }
 
@@ -338,95 +241,31 @@ public class MainSceneManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Shows the menu that allows the user to start the shortest path tutorial.
+    /// Initializes the shortest path tutorial events.
     /// </summary>
-    private void DisplayShortestPathTutorial()
+    private void InitializeShortestPathTutorial()
     {
-        // Display the parent panel
-        ShortestPathTutorialParentPanel.SetActive(true);
+        // Handle tutorial starting
+        ShortestPathTutorialUI.OnStart.AddListener(() => 
+        {
+            // Change the opacity of the sphere
+            Sphere.Opacity = SPHERE_TUTORIAL_OPACITY;
 
-        // Hide the tutorial
-        ShortestPathTutorialPanel.SetActive(false);
+            // Move the sphere
+            Sphere.transform.position = new Vector3(SPHERE_TUTORIAL_X_OFFSET, Sphere.transform.position.y, 0);
+        });
 
-        // Show the teaser
-        ShortestPathTutorialTeaserPanel.SetActive(true);
-    }
+        // Handle tutorial ending
+        ShortestPathTutorialUI.OnCancel.AddListener(() =>
+        {
+            SwitchView(true);
+        });
 
-    /// <summary>
-    /// Starts the shortest path tutorial.
-    /// </summary>
-    public void StartShortestPathTutorial()
-    {
-        // Hide the teaser
-        ShortestPathTutorialTeaserPanel.SetActive(false);
-
-        // Show the tutorial
-        ShortestPathTutorialPanel.SetActive(true);
-
-        // Change the opacity of the sphere
-        Sphere.Opacity = SPHERE_TUTORIAL_OPACITY;
-
-        // Move the sphere
-        Sphere.transform.position = new Vector3(SPHERE_TUTORIAL_X_OFFSET, Sphere.transform.position.y, 0);
-
-        // Start with the first step
-        ShowStep1InShortestPathTutorial();
-    }
-
-    /// <summary>
-    /// Stops the shortest path tutorial.
-    /// </summary>
-    public void CancelShortestPathTutorial()
-    {
-        SwitchView(true);
-    }
-
-    /// <summary>
-    /// Displays the first step in the shoretst path tutorial.
-    /// </summary>
-    public void ShowStep1InShortestPathTutorial()
-    {
-        // Change the colors
-        ShortestPathButton1.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_CURRENT_COLOR;
-        ShortestPathButton2.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_PENDING_COLOR;
-        ShortestPathButton3.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_PENDING_COLOR;
-        ShortestPathButton4.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_PENDING_COLOR;
-    }
-
-    /// <summary>
-    /// Displays the second step in the shoretst path tutorial.
-    /// </summary>
-    public void ShowStep2InShortestPathTutorial()
-    {
-        // Change the colors
-        ShortestPathButton1.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_COMPLETED_COLOR;
-        ShortestPathButton2.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_CURRENT_COLOR;
-        ShortestPathButton3.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_PENDING_COLOR;
-        ShortestPathButton4.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_PENDING_COLOR;
-    }
-
-    /// <summary>
-    /// Displays the third step in the shoretst path tutorial.
-    /// </summary>
-    public void ShowStep3InShortestPathTutorial()
-    {
-        // Change the colors
-        ShortestPathButton1.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_COMPLETED_COLOR;
-        ShortestPathButton2.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_COMPLETED_COLOR;
-        ShortestPathButton3.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_CURRENT_COLOR;
-        ShortestPathButton4.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_PENDING_COLOR;
-    }
-
-    /// <summary>
-    /// Displays the fourth step in the shoretst path tutorial.
-    /// </summary>
-    public void ShowStep4InShortestPathTutorial()
-    {
-        // Change the colors
-        ShortestPathButton1.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_COMPLETED_COLOR;
-        ShortestPathButton2.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_COMPLETED_COLOR;
-        ShortestPathButton3.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_COMPLETED_COLOR;
-        ShortestPathButton4.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_CURRENT_COLOR;
+        // Handle tutorial step change
+        ShortestPathTutorialUI.OnChange.AddListener(() =>
+        {
+            // TODO: display the step on the sphere
+        });
     }
 
     #endregion
