@@ -11,6 +11,11 @@ public class ShortestPathTutorialVisualizer : MonoBehaviour
     /// </summary>
     private static readonly Color STRAIGHT_LINE_COLOR = Color.magenta;
 
+    /// <summary>
+    /// The color of the lines connecting the points on the straight line to the center of the sphere.
+    /// </summary>
+    private static readonly Color CONNECTING_LINE_COLOR = Color.magenta;
+
     #endregion
 
     #region Fields/Properties
@@ -42,11 +47,11 @@ public class ShortestPathTutorialVisualizer : MonoBehaviour
         // Display steps
         if (step >= 1)
             DisplayStep1();
-        else if (step >= 2)
+        if (step >= 2)
             DisplayStep2();
-        else if (step >= 3)
+        if (step >= 3)
             DisplayStep3();
-        else if (step >= 4)
+        if (step >= 4)
             DisplayStep4();
     }
 
@@ -55,6 +60,8 @@ public class ShortestPathTutorialVisualizer : MonoBehaviour
     /// </summary>
     private void DisplayStep1()
     {
+        // TODO: Display the center of the sphere
+
         // Display straight line crossing the sphere between the start and end points
         Sphere.DisplayPaths
         (
@@ -75,7 +82,30 @@ public class ShortestPathTutorialVisualizer : MonoBehaviour
     /// </summary>
     private void DisplayStep2()
     {
+        // Compute the points on the straight line
+        List<Vector3> points = SphericalPaths.DataStructure.PathComputationMethods.GetStraightLine
+        (
+            PathsScriptableObject.StartCoordinates.SphericalCoordinates,
+            PathsScriptableObject.EndCoordinates.SphericalCoordinates,
+            15
+        );
+        points.Insert(0, PathsScriptableObject.StartCoordinates.SphericalCoordinates);
+        points.Add(PathsScriptableObject.EndCoordinates.SphericalCoordinates);
 
+        // TODO: Display each point on the straight line
+
+        // Connect the points to the center of the sphere
+        List<SphericalPaths.DataStructure.Path> paths = new List<SphericalPaths.DataStructure.Path>();
+        foreach (var point in points)
+            paths.Add(new SphericalPaths.DataStructure.Path
+            (
+                new List<SphericalPaths.DataStructure.Coordinates>
+                {
+                    new SphericalPaths.DataStructure.Coordinates(point, PathsScriptableObject.StartCoordinates.Radius, PathsScriptableObject.StartCoordinates.Width),
+                    new SphericalPaths.DataStructure.Coordinates(Vector3.zero, PathsScriptableObject.StartCoordinates.Radius, PathsScriptableObject.StartCoordinates.Width)
+                }
+            ));
+        Sphere.DisplayPaths(paths, CONNECTING_LINE_COLOR);
     }
 
     /// <summary>
