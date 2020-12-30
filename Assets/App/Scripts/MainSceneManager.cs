@@ -16,7 +16,7 @@ public class MainSceneManager : MonoBehaviour
     /// <summary>
     /// The color used to display the end point.
     /// </summary>
-    private static readonly Color END_POINT_COLOR = Color.black;
+    private static readonly Color END_POINT_COLOR = new Color(1f, 0.4661931f, 0, 1f);
 
     /// <summary>
     /// The color used to display the shortest path.
