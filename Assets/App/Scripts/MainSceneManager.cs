@@ -54,6 +54,16 @@ public class MainSceneManager : MonoBehaviour
 
 #endif
 
+    /// <summary>
+    /// The opacity of the sphere when running a tutorial.
+    /// </summary>
+    private const float SPHERE_TUTORIAL_OPACITY = 0.3f;
+
+    /// <summary>
+    /// The x position of the sphere when in tutorial mode.
+    /// </summary>
+    private const float SPHERE_TUTORIAL_X_OFFSET = -1f;
+
     #endregion
 
     #region Initialization
@@ -261,6 +271,9 @@ public class MainSceneManager : MonoBehaviour
         // Set opacity
         Sphere.Opacity = 1;
 
+        // Set position
+        Sphere.transform.position = new Vector3(0, Sphere.transform.position.y, 0);
+
         // Set light intensity
         Sphere.Intensity = SPHERE_LIGHT_INTENSITY;
 
@@ -282,7 +295,7 @@ public class MainSceneManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Show the menu that allows the user to start the shortest path tutorial.
+    /// Shows the menu that allows the user to start the shortest path tutorial.
     /// </summary>
     private void DisplayShortestPathTutorial()
     {
@@ -294,6 +307,32 @@ public class MainSceneManager : MonoBehaviour
 
         // Show the teaser
         ShortestPathTutorialTeaserPanel.SetActive(true);
+    }
+
+    /// <summary>
+    /// Starts the shortest path tutorial.
+    /// </summary>
+    public void StartShortestPathTutorial()
+    {
+        // Hide the teaser
+        ShortestPathTutorialTeaserPanel.SetActive(false);
+
+        // Show the tutorial
+        ShortestPathTutorialPanel.SetActive(true);
+
+        // Change the opacity of the sphere
+        Sphere.Opacity = SPHERE_TUTORIAL_OPACITY;
+
+        // Move the sphere
+        Sphere.transform.position = new Vector3(SPHERE_TUTORIAL_X_OFFSET, Sphere.transform.position.y, 0);
+    }
+
+    /// <summary>
+    /// Stops the shortest path tutorial.
+    /// </summary>
+    public void CancelShortestPathTutorial()
+    {
+        SwitchView(true);
     }
 
     #endregion
