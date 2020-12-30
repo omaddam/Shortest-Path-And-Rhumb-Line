@@ -88,11 +88,9 @@ public class MainSceneManager : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        // Update legends colors
-        StartPointImage.color = START_POINT_COLOR;
-        EndPointImage.color = END_POINT_COLOR;
-        ShortestPathImage.color = SHORTEST_PATH_COLOR;
-        RhumbLineImage.color = RHUMB_PATH_COLOR;
+        // Update legend colors
+        LegendsUI.Initialize(START_POINT_COLOR, END_POINT_COLOR,
+            SHORTEST_PATH_COLOR, RHUMB_PATH_COLOR);
 
         // Set the sphere rotation speed
         Sphere.GetComponent<SphericalPaths.SphereRotation>().RotationSpeed = SPHERE_ROTATION_SPEED;
@@ -141,32 +139,11 @@ public class MainSceneManager : MonoBehaviour
     [Header("Legends")]
 
     /// <summary>
-    /// References the image UI that displays the color of the start point pin.
+    /// References the UI manager that displays the colors used in a legend.
     /// </summary>
-    [Tooltip("References the image UI that displays the color of the start point pin.")]
+    [Tooltip("References the UI manager that displays the colors used in a legend.")]
     [SerializeField]
-    private Image StartPointImage;
-
-    /// <summary>
-    /// References the image UI that displays the color of the end point pin.
-    /// </summary>
-    [Tooltip("References the image UI that displays the color of the end point pin.")]
-    [SerializeField]
-    private Image EndPointImage;
-
-    /// <summary>
-    /// References the image UI that displays the color of the shortest path.
-    /// </summary>
-    [Tooltip("References the image UI that displays the color of the shortest path.")]
-    [SerializeField]
-    private Image ShortestPathImage;
-
-    /// <summary>
-    /// References the image UI that displays the color of the rhumb path.
-    /// </summary>
-    [Tooltip("References the image UI that displays the color of the rhumb path.")]
-    [SerializeField]
-    private Image RhumbLineImage;
+    private LegendsUIManager LegendsUI;
 
 
 

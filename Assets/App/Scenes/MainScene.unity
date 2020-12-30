@@ -3364,10 +3364,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PathsScriptableObject: {fileID: 11400000, guid: e27bd0ba17891ff42af71e206b294455, type: 2}
   PathText: {fileID: 991785128}
-  StartPointImage: {fileID: 679453572}
-  EndPointImage: {fileID: 1781148911}
-  ShortestPathImage: {fileID: 1026554347}
-  RhumbLineImage: {fileID: 788032922}
+  LegendsUI: {fileID: 2009223568}
   SwitchButton: {fileID: 1991097191}
   Sphere: {fileID: 8649031174807674473}
   Plane: {fileID: 117784886}
@@ -4226,6 +4223,7 @@ GameObject:
   - component: {fileID: 2009223565}
   - component: {fileID: 2009223567}
   - component: {fileID: 2009223566}
+  - component: {fileID: 2009223568}
   m_Layer: 5
   m_Name: Legends
   m_TagString: Untagged
@@ -4291,6 +4289,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2009223564}
   m_CullTransparentMesh: 1
+--- !u!114 &2009223568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009223564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93587e8824568d438cc680fdeafe63f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartPointImage: {fileID: 679453572}
+  EndPointImage: {fileID: 1781148911}
+  ShortestPathImage: {fileID: 1026554347}
+  RhumbLineImage: {fileID: 788032922}
 --- !u!1 &2051791264
 GameObject:
   m_ObjectHideFlags: 0
