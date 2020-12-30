@@ -88,7 +88,7 @@ public class MainSceneManager : MonoBehaviour
             PathsScriptableObject.EndCoordinates.CartesianCoordinates.x);
 
         // Display the sphere
-        DisplaySphere();
+        SwitchView(true);
     }
 
     #endregion
@@ -202,18 +202,29 @@ public class MainSceneManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Switches between sphere and plane view.
+    /// Toggles between sphere and plane view.
     /// </summary>
     public void SwitchView()
     {
+        SwitchView(null);
+    }
+
+    /// <summary>
+    /// Switches between sphere and plane view.
+    /// </summary>
+    private void SwitchView(bool? spherView = null)
+    {
+        // Check if sphere view or plane view
+        spherView ??= !Sphere.gameObject.activeSelf;
+
         // Show plane view
-        if (Sphere.gameObject.activeSelf)
+        if (!spherView.Value)
         {
             // Hide the sphere, show the plane, and display the two paths
             DisplayPlane();
 
             // Hide the shortest path tutorial
-            ShortestPathTutorialPanel.SetActive(false);
+            ShortestPathTutorialParentPanel.SetActive(false);
         }
 
         // Show sphere view
@@ -276,11 +287,13 @@ public class MainSceneManager : MonoBehaviour
     private void DisplayShortestPathTutorial()
     {
         // Display the parent panel
-        ShortestPathTutorialPanel.SetActive(true);
+        ShortestPathTutorialParentPanel.SetActive(true);
 
-        // TODO: Hide the tutorial
+        // Hide the tutorial
+        ShortestPathTutorialPanel.SetActive(false);
 
-        // TODO: Show the teaser
+        // Show the teaser
+        ShortestPathTutorialTeaserPanel.SetActive(true);
     }
 
     #endregion
