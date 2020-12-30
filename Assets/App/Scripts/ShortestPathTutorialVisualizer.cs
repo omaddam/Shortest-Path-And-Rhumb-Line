@@ -21,6 +21,11 @@ public class ShortestPathTutorialVisualizer : MonoBehaviour
     /// </summary>
     private static readonly Color PROJECTION_LINE_COLOR = Color.magenta;
 
+    /// <summary>
+    /// The color of the shortest path.
+    /// </summary>
+    private static readonly Color SHORTEST_PATH_COLOR = Color.red;
+
     #endregion
 
     #region Fields/Properties
@@ -170,7 +175,7 @@ public class ShortestPathTutorialVisualizer : MonoBehaviour
     /// </summary>
     private void DisplayStep4()
     {
-
+        Sphere.DisplayPaths(PathsScriptableObject.ShortestPath, SHORTEST_PATH_COLOR);
     }
 
     #endregion
