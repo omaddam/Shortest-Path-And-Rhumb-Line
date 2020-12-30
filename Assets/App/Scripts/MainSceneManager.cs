@@ -89,15 +89,6 @@ public class MainSceneManager : MonoBehaviour
         // Initialize the shortest path tutorial
         InitializeShortestPathTutorial();
 
-        // Display path information
-        PathText.text = string.Format("{0} [Lat: {1:0.000}, Lon: {2:0.000}] to {3} [Lat: {4:0.000}, Lon: {5:0.000}]",
-            PathsScriptableObject.StartLabel,
-            PathsScriptableObject.StartCoordinates.CartesianCoordinates.y,
-            PathsScriptableObject.StartCoordinates.CartesianCoordinates.x,
-            PathsScriptableObject.EndLabel,
-            PathsScriptableObject.EndCoordinates.CartesianCoordinates.y,
-            PathsScriptableObject.EndCoordinates.CartesianCoordinates.x);
-
         // Display the sphere
         SwitchView(true);
     }
@@ -114,13 +105,6 @@ public class MainSceneManager : MonoBehaviour
     [Tooltip("References the scriptable object that stores the demo information.")]
     [SerializeField]
     private PathManagerScriptableObject PathsScriptableObject;
-
-    /// <summary>
-    /// References the text that displays the path start/end point information.
-    /// </summary>
-    [Tooltip("References the text that displays the path start/end point information.")]
-    [SerializeField]
-    private Text PathText;
 
 
 
