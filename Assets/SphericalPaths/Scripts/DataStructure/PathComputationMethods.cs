@@ -196,7 +196,7 @@ namespace SphericalPaths.DataStructure
         /// <param name="end">The last coordinates in the path.</param>
         /// <param name="segmentsCount">The default number of coordinates required to form the path.</param>
         /// <returns></returns>
-        private static List<Vector3> GetStraightLine(Vector3 start, Vector3 end,
+        public static List<Vector3> GetStraightLine(Vector3 start, Vector3 end,
             int segmentsCount)
         {
             // Compute midpoint
@@ -233,7 +233,7 @@ namespace SphericalPaths.DataStructure
         /// </summary>
         /// <param name="points">The points to project.</param>
         /// <param name="radius">The radius of the sphere projecting the points.</param>
-        private static List<Vector3> ProjectPointsOnSphere(List<Vector3> points, float radius)
+        public static List<Vector3> ProjectPointsOnSphere(List<Vector3> points, float radius)
         {
             // Initialize projection list
             List<Vector3> projectedPoints = new List<Vector3>();
