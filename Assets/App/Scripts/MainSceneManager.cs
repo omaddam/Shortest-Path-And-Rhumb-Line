@@ -54,6 +54,31 @@ public class MainSceneManager : MonoBehaviour
 
 #endif
 
+    /// <summary>
+    /// The opacity of the sphere when running a tutorial.
+    /// </summary>
+    private const float SPHERE_TUTORIAL_OPACITY = 0.3f;
+
+    /// <summary>
+    /// The x position of the sphere when in tutorial mode.
+    /// </summary>
+    private const float SPHERE_TUTORIAL_X_OFFSET = -1f;
+
+    /// <summary>
+    /// The color applied to the button of current step.
+    /// </summary>
+    private static readonly Color SHORTEST_PATH_TUTORIAL_BUTTON_CURRENT_COLOR = Color.yellow;
+
+    /// <summary>
+    /// The color applied to the buttons of completed steps.
+    /// </summary>
+    private static readonly Color SHORTEST_PATH_TUTORIAL_BUTTON_COMPLETED_COLOR = Color.green;
+
+    /// <summary>
+    /// The color applied to the buttons of pending steps.
+    /// </summary>
+    private static readonly Color SHORTEST_PATH_TUTORIAL_BUTTON_PENDING_COLOR = Color.white;
+
     #endregion
 
     #region Initialization
@@ -88,7 +113,7 @@ public class MainSceneManager : MonoBehaviour
             PathsScriptableObject.EndCoordinates.CartesianCoordinates.x);
 
         // Display the sphere
-        DisplaySphere();
+        SwitchView(true);
     }
 
     #endregion
@@ -164,6 +189,59 @@ public class MainSceneManager : MonoBehaviour
     /// </summary>
     public SphericalPaths.Plane Plane;
 
+
+
+    [Header("Shortest Path Tutorial")]
+
+    /// <summary>
+    /// References the planel that holds the shortest path tutorial.
+    /// </summary>
+    [Tooltip("References the planel that holds the shortest path tutorial.")]
+    [SerializeField]
+    private GameObject ShortestPathTutorialParentPanel;
+
+    /// <summary>
+    /// References the planel that holds the teaser for shortest path tutorial.
+    /// </summary>
+    [Tooltip("References the planel that holds the teaser for shortest path tutorial.")]
+    [SerializeField]
+    private GameObject ShortestPathTutorialTeaserPanel;
+
+    /// <summary>
+    /// References the planel that holds the actual tutorial.
+    /// </summary>
+    [Tooltip("References the planel that holds the actual tutorial.")]
+    [SerializeField]
+    private GameObject ShortestPathTutorialPanel;
+
+    /// <summary>
+    /// References the button in the first step of the shortest path tutorial.
+    /// </summary>
+    [Tooltip("References the button in the first step of the shortest path tutorial.")]
+    [SerializeField]
+    private Button ShortestPathButton1;
+
+    /// <summary>
+    /// References the button in the second step of the shortest path tutorial.
+    /// </summary>
+    [Tooltip("References the button in the second step of the shortest path tutorial.")]
+    [SerializeField]
+    private Button ShortestPathButton2;
+
+    /// <summary>
+    /// References the button in the third step of the shortest path tutorial.
+    /// </summary>
+    [Tooltip("References the button in the third step of the shortest path tutorial.")]
+    [SerializeField]
+    private Button ShortestPathButton3;
+
+    /// <summary>
+    /// References the button in the fourth step of the shortest path tutorial.
+    /// </summary>
+    [Tooltip("References the button in the fourth step of the shortest path tutorial.")]
+    [SerializeField]
+    private Button ShortestPathButton4;
+
     #endregion
 
     #region Methods
@@ -177,15 +255,45 @@ public class MainSceneManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Switches between sphere and plane view.
+    /// Toggles between sphere and plane view.
     /// </summary>
     public void SwitchView()
     {
-        if (Sphere.gameObject.activeSelf)
-            DisplayPlane();
-        else
-            DisplaySphere();
+        SwitchView(null);
     }
+
+    /// <summary>
+    /// Switches between sphere and plane view.
+    /// </summary>
+    private void SwitchView(bool? spherView = null)
+    {
+        // Check if sphere view or plane view
+        spherView ??= !Sphere.gameObject.activeSelf;
+
+        // Show plane view
+        if (!spherView.Value)
+        {
+            // Hide the sphere, show the plane, and display the two paths
+            DisplayPlane();
+
+            // Hide the shortest path tutorial
+            ShortestPathTutorialParentPanel.SetActive(false);
+        }
+
+        // Show sphere view
+        else
+        {
+            // Hide the plane, show the sphere, and display the two paths
+            DisplaySphere();
+
+            // Display the shortest path tutorial teaser
+            DisplayShortestPathTutorial();
+        }
+    }
+
+    #endregion
+
+    #region Sphere Methods
 
     /// <summary>
     /// Displays the points and paths on the sphere.
@@ -206,6 +314,9 @@ public class MainSceneManager : MonoBehaviour
         // Set opacity
         Sphere.Opacity = 1;
 
+        // Set position
+        Sphere.transform.position = new Vector3(0, Sphere.transform.position.y, 0);
+
         // Set light intensity
         Sphere.Intensity = SPHERE_LIGHT_INTENSITY;
 
@@ -219,12 +330,108 @@ public class MainSceneManager : MonoBehaviour
 
         // Focus on the start coordinates
         Sphere.GetComponent<SphericalPaths.SphereRotation>().Focus(
-            PathsScriptableObject.StartCoordinates.CartesianCoordinates.x, 
+            PathsScriptableObject.StartCoordinates.CartesianCoordinates.x,
             PathsScriptableObject.StartCoordinates.CartesianCoordinates.y);
 
         // Change switch button text
         SwitchButton.GetComponentInChildren<Text>().text = "Switch to plane view";
     }
+
+    /// <summary>
+    /// Shows the menu that allows the user to start the shortest path tutorial.
+    /// </summary>
+    private void DisplayShortestPathTutorial()
+    {
+        // Display the parent panel
+        ShortestPathTutorialParentPanel.SetActive(true);
+
+        // Hide the tutorial
+        ShortestPathTutorialPanel.SetActive(false);
+
+        // Show the teaser
+        ShortestPathTutorialTeaserPanel.SetActive(true);
+    }
+
+    /// <summary>
+    /// Starts the shortest path tutorial.
+    /// </summary>
+    public void StartShortestPathTutorial()
+    {
+        // Hide the teaser
+        ShortestPathTutorialTeaserPanel.SetActive(false);
+
+        // Show the tutorial
+        ShortestPathTutorialPanel.SetActive(true);
+
+        // Change the opacity of the sphere
+        Sphere.Opacity = SPHERE_TUTORIAL_OPACITY;
+
+        // Move the sphere
+        Sphere.transform.position = new Vector3(SPHERE_TUTORIAL_X_OFFSET, Sphere.transform.position.y, 0);
+
+        // Start with the first step
+        ShowStep1InShortestPathTutorial();
+    }
+
+    /// <summary>
+    /// Stops the shortest path tutorial.
+    /// </summary>
+    public void CancelShortestPathTutorial()
+    {
+        SwitchView(true);
+    }
+
+    /// <summary>
+    /// Displays the first step in the shoretst path tutorial.
+    /// </summary>
+    public void ShowStep1InShortestPathTutorial()
+    {
+        // Change the colors
+        ShortestPathButton1.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_CURRENT_COLOR;
+        ShortestPathButton2.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_PENDING_COLOR;
+        ShortestPathButton3.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_PENDING_COLOR;
+        ShortestPathButton4.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_PENDING_COLOR;
+    }
+
+    /// <summary>
+    /// Displays the second step in the shoretst path tutorial.
+    /// </summary>
+    public void ShowStep2InShortestPathTutorial()
+    {
+        // Change the colors
+        ShortestPathButton1.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_COMPLETED_COLOR;
+        ShortestPathButton2.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_CURRENT_COLOR;
+        ShortestPathButton3.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_PENDING_COLOR;
+        ShortestPathButton4.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_PENDING_COLOR;
+    }
+
+    /// <summary>
+    /// Displays the third step in the shoretst path tutorial.
+    /// </summary>
+    public void ShowStep3InShortestPathTutorial()
+    {
+        // Change the colors
+        ShortestPathButton1.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_COMPLETED_COLOR;
+        ShortestPathButton2.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_COMPLETED_COLOR;
+        ShortestPathButton3.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_CURRENT_COLOR;
+        ShortestPathButton4.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_PENDING_COLOR;
+    }
+
+    /// <summary>
+    /// Displays the fourth step in the shoretst path tutorial.
+    /// </summary>
+    public void ShowStep4InShortestPathTutorial()
+    {
+        // Change the colors
+        ShortestPathButton1.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_COMPLETED_COLOR;
+        ShortestPathButton2.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_COMPLETED_COLOR;
+        ShortestPathButton3.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_COMPLETED_COLOR;
+        ShortestPathButton4.GetComponent<Image>().color = SHORTEST_PATH_TUTORIAL_BUTTON_CURRENT_COLOR;
+    }
+
+    #endregion
+
+    #region Plane Methods
 
     /// <summary>
     /// Displays the points and paths on the plane.
