@@ -212,6 +212,9 @@ public class MainSceneManager : MonoBehaviour
 
             // Hide the shortest path tutorial
             ShortestPathTutorialUI.Hide();
+
+            // Hide the path traversal
+            PathTraversalUI.Hide();
         }
 
         // Show sphere view
@@ -225,6 +228,9 @@ public class MainSceneManager : MonoBehaviour
 
             // Display the shortest path tutorial
             ShortestPathTutorialUI.Show();
+
+            // Display the path traversal
+            PathTraversalUI.Show();
         }
     }
 
