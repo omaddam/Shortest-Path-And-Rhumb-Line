@@ -247,5 +247,22 @@ namespace SphericalPaths.DataStructure
 
         #endregion
 
+        #region Bearing Methods
+
+        /// <summary>
+        /// Computes the bearing angle between two coordinates.
+        /// https://www.movable-type.co.uk/scripts/latlong.html
+        /// </summary>
+        public static float ComputeBearingAngle(Coordinates start, Coordinates end)
+        {
+            double y = Math.Sin(end.CartesianCoordinates.x - start.CartesianCoordinates.x) * Math.Cos(end.CartesianCoordinates.y);
+            double x = Math.Cos(start.CartesianCoordinates.y) * Math.Sin(end.CartesianCoordinates.y) -
+                      Math.Sin(start.CartesianCoordinates.y) * Math.Cos(end.CartesianCoordinates.y) * Math.Cos(end.CartesianCoordinates.x - start.CartesianCoordinates.x);
+            double bearingInRadian = Math.Atan2(y, x);
+            return (float)ConvertFromRadianToDegree(bearingInRadian);
+        }
+
+        #endregion
+
     }
 }
