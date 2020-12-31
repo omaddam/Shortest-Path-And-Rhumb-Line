@@ -3365,6 +3365,7 @@ MonoBehaviour:
   Sphere: {fileID: 8649031174807674473}
   Plane: {fileID: 117784886}
   ShortestPathTutorialVisualizer: {fileID: 1321234382}
+  PathTraversal: {fileID: 1321234383}
   LegendsUI: {fileID: 2009223568}
   ShortestPathTutorialUI: {fileID: 631313196}
 --- !u!114 &1321234382

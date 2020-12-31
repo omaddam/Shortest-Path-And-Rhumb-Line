@@ -138,6 +138,13 @@ public class MainSceneManager : MonoBehaviour
     [SerializeField]
     private ShortestPathTutorialVisualizer ShortestPathTutorialVisualizer;
 
+    /// <summary>
+    /// References the manager that allows the camera to traverse a path.
+    /// </summary>
+    [Tooltip("References the manager that allows the camera to traverse a path.")]
+    [SerializeField]
+    private PathTraversalManager PathTraversal;
+
 
 
     [Header("UI Managers")]
