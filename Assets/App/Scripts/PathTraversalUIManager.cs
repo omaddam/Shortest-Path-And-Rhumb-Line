@@ -196,8 +196,9 @@ public class PathTraversalUIManager : MonoBehaviour
             PathsScriptableObject.StartCoordinates.Radius, PathsScriptableObject.StartCoordinates.Width);
 
         // Compute bearing angle
-        float bearing = PathComputationMethods.ComputeRhumbPathBearingAngle(
-            cameraCoordinates, PathsScriptableObject.EndCoordinates);
+        float bearing = TraversingShortestPath.Value 
+            ? PathComputationMethods.ComputeShortestPathBearingAngle(cameraCoordinates, PathsScriptableObject.EndCoordinates)
+            : PathComputationMethods.ComputeRhumbPathBearingAngle(cameraCoordinates, PathsScriptableObject.EndCoordinates);
 
         // Update arrow rotation
         CompassDirection.transform.localEulerAngles = new Vector3(0, 0, -1) * bearing;

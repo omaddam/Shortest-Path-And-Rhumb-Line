@@ -271,7 +271,7 @@ namespace SphericalPaths.DataStructure
         /// Computes the bearing angle between two coordinates.
         /// https://www.movable-type.co.uk/scripts/latlong.html
         /// </summary>
-        public static float ComputeBearingAngle(Coordinates start, Coordinates end)
+        public static float ComputeShortestPathBearingAngle(Coordinates start, Coordinates end)
         {
             double lat1 = ConvertFromDegreeToRadian(start.CartesianCoordinates.y);
             double lat2 = ConvertFromDegreeToRadian(end.CartesianCoordinates.y);
