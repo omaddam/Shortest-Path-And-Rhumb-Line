@@ -55,11 +55,11 @@ public class PathTraversalUIManager : MonoBehaviour
     private Camera Camera;
 
     /// <summary>
-    /// References the sphere that the camera will rotate around.
+    /// References the scriptable object that stores the demo information.
     /// </summary>
-    [Tooltip("References the sphere that the camera will rotate around.")]
+    [Tooltip("References the scriptable object that stores the demo information.")]
     [SerializeField]
-    private SphericalPaths.Sphere Sphere;
+    private PathManagerScriptableObject PathsScriptableObject;
 
     /// <summary>
     /// References the planel that holds the teaser.
