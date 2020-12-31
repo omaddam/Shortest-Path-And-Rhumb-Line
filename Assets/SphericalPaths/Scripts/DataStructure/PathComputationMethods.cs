@@ -30,9 +30,9 @@ namespace SphericalPaths.DataStructure
         /// <returns>Angle in radian.</returns>
         /// <param name="degree">Angle in degree.</param>
         private static double ConvertFromDegreeToRadian(double degree)
-		{
-			return Math.PI * degree / 180.0;
-		}
+        {
+            return Math.PI * degree / 180.0;
+        }
 
         /// <summary>
         /// Converts cartesian coordinates from degrees to radian.
@@ -46,15 +46,15 @@ namespace SphericalPaths.DataStructure
             );
         }
 
-		/// <summary>
-		/// Converts an angle from radian to degree.
-		/// </summary>
-		/// <returns>Angle in degree.</returns>
-		/// <param name="radian">Angle in radian.</param>
-		private static double ConvertFromRadianToDegree(double radian)
-		{
-			return radian * (180.0 / Math.PI);
-		}
+        /// <summary>
+        /// Converts an angle from radian to degree.
+        /// </summary>
+        /// <returns>Angle in degree.</returns>
+        /// <param name="radian">Angle in radian.</param>
+        private static double ConvertFromRadianToDegree(double radian)
+        {
+            return radian * (180.0 / Math.PI);
+        }
 
         /// <summary>
         /// Converts cartesian coordinates from radian to degrees.
@@ -78,7 +78,7 @@ namespace SphericalPaths.DataStructure
         /// <param name="start">The first coordinates in the path.</param>
         /// <param name="end">The last coordinates in the path.</param>
         /// <param name="segmentsCount">The default number of coordinates required to form the path.</param>
-		public static Path GetRhumbPath(this Coordinates start, Coordinates end, 
+		public static Path GetRhumbPath(this Coordinates start, Coordinates end,
             int segmentsCount = RHUMB_PATH_SEGMENTS_COUNT)
         {
             List<Coordinates> coordinates = GetRhumbLine(start, end, segmentsCount);
@@ -141,12 +141,12 @@ namespace SphericalPaths.DataStructure
             double f1 = Math.Tan(Math.PI / 4 + startRadian.y / 2);
             double f2 = Math.Tan(Math.PI / 4 + endRadian.y / 2);
             double f3 = Math.Tan(Math.PI / 4 + midLat / 2);
-            float midLong = 
+            float midLong =
                 (float)
                 ((
-                    (endRadian.x - startRadian.x) * Math.Log(f3) 
+                    (endRadian.x - startRadian.x) * Math.Log(f3)
                     +
-                    startRadian.x * Math.Log(f2) 
+                    startRadian.x * Math.Log(f2)
                     -
                     endRadian.x * Math.Log(f1)
                 ) / Math.Log(f2 / f1));
@@ -268,7 +268,25 @@ namespace SphericalPaths.DataStructure
             return (float)ConvertFromRadianToDegree(brng);
         }
 
+        /// Computes the bearing angle between two coordinates.
+        /// https://www.movable-type.co.uk/scripts/latlong.html
+        /// </summary>
+        public static float ComputeBearingAngle(Coordinates start, Coordinates end)
+        {
+            double lat1 = ConvertFromDegreeToRadian(start.CartesianCoordinates.y);
+            double lat2 = ConvertFromDegreeToRadian(end.CartesianCoordinates.y);
+            double lon1 = ConvertFromDegreeToRadian(start.CartesianCoordinates.x);
+            double lon2 = ConvertFromDegreeToRadian(end.CartesianCoordinates.x);
+
+            double y = Math.Sin(lon2 - lon1) * Math.Cos(lat2);
+            double x = Math.Cos(lat1) * Math.Sin(lat2) -
+                Math.Sin(lat1) * Math.Cos(lat2) * Math.Cos(lon2 - lon1);
+            double bearingInRadian = Math.Atan2(y, x);
+            return (float)ConvertFromRadianToDegree(bearingInRadian);
+        }
+
         #endregion
+
 
     }
 }
