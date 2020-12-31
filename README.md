@@ -32,3 +32,32 @@ git clone https://github.com/omaddam/Shortest-Path-And-Rhumb-Line.git
 ```git
 git flow init
 ```
+
+# Standards
+
+### General Standards
+
+* Line ending: CRLF
+* Case styles: Camel, Pascal, and Snake case
+  * Arguments, paramters, and local variables: camel case (e.g. shortestPath)
+  * Global variables: pascal case (e.g. StartCoordinates)
+  * Constants and static variables: snake case (ALL CAPS) (e.g. DEFAULT_COLOR)
+* Methods naming convention:
+  * Pascal case (e.g. GeneratePath)
+  * Verbs
+
+### Commenting Standards
+
+* `///` Summaries: Full-usage of English grammar and punctuation. (e.g. Add periods to the end of your summaries, as if you were writing a phrase or sentence.)
+*  `//` In-line comments: quick, point-form. Grammar and punctuation not needed
+
+### Assets / App
+
+* Contains all scripts and resources used in the demo.
+* Scripts are created under Assets/App/Scripts folder.
+
+### Assets / Others
+
+* All components should be included under Assets/\<Name> folder. (e.g. Assets/SphericalPaths)
+* Each component should be isolated and under **NO CIRCUMSTANCES** referencing or using another component's scripts.
+* Components are **NOT** allowed to reference or call application/demo scripts.
