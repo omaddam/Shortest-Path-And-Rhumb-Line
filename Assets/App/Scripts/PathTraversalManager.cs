@@ -53,12 +53,12 @@ public class PathTraversalManager : MonoBehaviour
     /// <summary>
     /// The position of the camera before starting the traversion.
     /// </summary>
-    private Vector3 InitialCameraPosition;
+    private Vector3? InitialCameraPosition;
 
     /// <summary>
     /// The rotation of the camera before starting the traversion.
     /// </summary>
-    private Vector3 InitialCameraRotation;
+    private Vector3? InitialCameraRotation;
 
     #endregion
 
@@ -148,8 +148,10 @@ public class PathTraversalManager : MonoBehaviour
         LeanTween.cancelAll();
 
         // Reset camera's position and rotation
-        Camera.transform.position = InitialCameraPosition;
-        Camera.transform.eulerAngles = InitialCameraRotation;
+        if (InitialCameraPosition.HasValue)
+            Camera.transform.position = InitialCameraPosition.Value;
+        if (InitialCameraRotation.HasValue)
+            Camera.transform.eulerAngles = InitialCameraRotation.Value;
     }
 
     #endregion
