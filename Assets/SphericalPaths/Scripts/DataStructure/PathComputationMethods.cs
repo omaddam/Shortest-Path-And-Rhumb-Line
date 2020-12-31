@@ -250,10 +250,10 @@ namespace SphericalPaths.DataStructure
         #region Bearing Methods
 
         /// <summary>
-        /// Computes the bearing angle between two coordinates.
+        /// Computes the bearing angle between two coordinates when going through the rhumb line.
         /// https://www.sunearthtools.com/tools/distance.php#txtDist_3
         /// </summary>
-        public static float ComputeBearingAngle(Coordinates start, Coordinates end)
+        public static float ComputeRhumbPathBearingAngle(Coordinates start, Coordinates end)
         {
             double lat1 = ConvertFromDegreeToRadian(start.CartesianCoordinates.y);
             double lat2 = ConvertFromDegreeToRadian(end.CartesianCoordinates.y);

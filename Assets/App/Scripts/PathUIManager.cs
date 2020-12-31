@@ -22,7 +22,7 @@ public class PathUIManager : MonoBehaviour
             PathsScriptableObject.EndLabel,
             PathsScriptableObject.EndCoordinates.CartesianCoordinates.y,
             PathsScriptableObject.EndCoordinates.CartesianCoordinates.x,
-            SphericalPaths.DataStructure.PathComputationMethods.ComputeBearingAngle(PathsScriptableObject.StartCoordinates, PathsScriptableObject.EndCoordinates)
+            SphericalPaths.DataStructure.PathComputationMethods.ComputeRhumbPathBearingAngle(PathsScriptableObject.StartCoordinates, PathsScriptableObject.EndCoordinates)
         );
     }
 

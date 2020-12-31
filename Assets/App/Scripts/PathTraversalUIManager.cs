@@ -189,7 +189,7 @@ public class PathTraversalUIManager : MonoBehaviour
             PathsScriptableObject.StartCoordinates.Radius, PathsScriptableObject.StartCoordinates.Width);
 
         // Compute bearing angle
-        float bearing = PathComputationMethods.ComputeBearingAngle(
+        float bearing = PathComputationMethods.ComputeRhumbPathBearingAngle(
             cameraCoordinates, PathsScriptableObject.EndCoordinates);
 
         // Update arrow rotation
