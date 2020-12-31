@@ -86,8 +86,9 @@ public class MainSceneManager : MonoBehaviour
         Sphere.gameObject.SetActive(false);
         Plane.gameObject.SetActive(false);
 
-        // Initialize the shortest path tutorial
+        // Initialize the path tutorials aand animations
         InitializeShortestPathTutorial();
+        InitializePathTraversal();
 
         // Display the sphere
         SwitchView(true);
@@ -272,7 +273,6 @@ public class MainSceneManager : MonoBehaviour
         Sphere.DisplayPaths(PathsScriptableObject.RhumbPath, RHUMB_PATH_COLOR);
 
         // Focus on the start coordinates
-        Sphere.GetComponent<SphericalPaths.SphereRotation>().enabled = true;
         Sphere.GetComponent<SphericalPaths.SphereRotation>().Focus(
             (PathsScriptableObject.StartCoordinates.CartesianCoordinates.x + PathsScriptableObject.EndCoordinates.CartesianCoordinates.y) / 2f,
             (PathsScriptableObject.StartCoordinates.CartesianCoordinates.y + PathsScriptableObject.EndCoordinates.CartesianCoordinates.y) / 2f);
@@ -292,6 +292,9 @@ public class MainSceneManager : MonoBehaviour
             // Change the opacity of the sphere
             Sphere.Opacity = SPHERE_TUTORIAL_OPACITY;
 
+            // Hide the path traversal UI
+            PathTraversalUI.Hide();
+
             // Move the sphere
             Sphere.transform.position = new Vector3(SPHERE_TUTORIAL_X_OFFSET, Sphere.transform.position.y, 0);
         });
@@ -307,6 +310,48 @@ public class MainSceneManager : MonoBehaviour
         {
             ShortestPathTutorialVisualizer.Display(ShortestPathTutorialUI.CurrentStep);
         });
+    }
+
+    /// <summary>
+    /// Initializes the path traversal events.
+    /// </summary>
+    private void InitializePathTraversal()
+    {
+        // Handle shortest path traverse starting
+        PathTraversalUI.OnShortestPathStart.AddListener(() =>
+        {
+            // Hide the tutorial UI
+            ShortestPathTutorialUI.Hide();
+
+            // Disable sphere rotation
+            Sphere.GetComponent<SphericalPaths.SphereRotation>().enabled = false;
+
+            // Traverse
+            PathTraversal.TraversePath(PathsScriptableObject.ShortestPath);
+        });
+
+        // Handle rhumb path traverse starting
+        PathTraversalUI.OnRhumbPathStart.AddListener(() =>
+        {
+            // Hide the tutorial UI
+            ShortestPathTutorialUI.Hide();
+
+            // Disable sphere rotation
+            Sphere.GetComponent<SphericalPaths.SphereRotation>().enabled = false;
+
+            // Traverse
+            PathTraversal.TraversePath(PathsScriptableObject.RhumbPath);
+        });
+
+        // Handle cancel
+        PathTraversalUI.OnCancel.AddListener(() =>
+        {
+            // Stop travering
+            PathTraversal.Stop();
+
+            SwitchView(true);
+        });
+
     }
 
     #endregion
