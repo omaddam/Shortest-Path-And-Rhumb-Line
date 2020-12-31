@@ -3853,7 +3853,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   Camera: {fileID: 963194227}
-  Sphere: {fileID: 8649031174807674473}
+  PathsScriptableObject: {fileID: 11400000, guid: e27bd0ba17891ff42af71e206b294455, type: 2}
   TeaserPanel: {fileID: 523846266}
   CompassPanel: {fileID: 412824371}
   StartShortestPathButton: {fileID: 2009659623}
