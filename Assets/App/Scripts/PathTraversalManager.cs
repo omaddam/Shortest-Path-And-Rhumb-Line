@@ -50,6 +50,16 @@ public class PathTraversalManager : MonoBehaviour
     [SerializeField]
     private SphericalPaths.Sphere Sphere;
 
+    /// <summary>
+    /// The position of the camera before starting the traversion.
+    /// </summary>
+    private Vector3 InitialCameraPosition;
+
+    /// <summary>
+    /// The rotation of the camera before starting the traversion.
+    /// </summary>
+    private Vector3 InitialCameraRotation;
+
     #endregion
 
     #region Methods
@@ -62,6 +72,10 @@ public class PathTraversalManager : MonoBehaviour
         // Reset the rotation of the sphere to zeros
         // This is required to make the math easier
         Sphere.transform.eulerAngles = Vector3.zero;
+
+        // Store the camera's position and rotation
+        InitialCameraPosition = Camera.transform.position;
+        InitialCameraRotation = Camera.transform.eulerAngles;
 
         // Initialize the sequence
         var sequence = LeanTween.sequence(true);
@@ -130,7 +144,12 @@ public class PathTraversalManager : MonoBehaviour
     /// </summary>
     public void Stop()
     {
-        LeanTween.cancel(gameObject);
+        // Stop all tweens
+        LeanTween.cancelAll();
+
+        // Reset camera's position and rotation
+        Camera.transform.position = InitialCameraPosition;
+        Camera.transform.eulerAngles = InitialCameraRotation;
     }
 
     #endregion
