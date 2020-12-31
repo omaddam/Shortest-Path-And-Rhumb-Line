@@ -7,6 +7,13 @@ This project simulates the generation of shortest paths and rhumb lines between 
 | Tutorial on how to compute the shortest path | Traversing the paths |
 | <img src="docs/ShortestPathTutorial.gif" height="250" /> | <img src="docs/TraversingPaths.gif" height="250" /> |
 
+# Demo
+
+![Simulation](docs/Simulation.gif)
+
+We created a WebGL application that demonstrates different features provided by our simulation.
+A complete demo can be found on [https://omaddam.github.io/Shortest-Path-And-Rhumb-Line/](https://omaddam.github.io/Shortest-Path-And-Rhumb-Line/).
+
 # Getting Started
 
 These instructions will get you a copy of the project on your local machine for development and testing purposes.
