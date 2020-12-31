@@ -3843,6 +3843,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1379666d7bd2304581cd9dfc8278aae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnShortestPathStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRhumbPathStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCancel:
+    m_PersistentCalls:
+      m_Calls: []
+  Camera: {fileID: 963194227}
+  Sphere: {fileID: 8649031174807674473}
   TeaserPanel: {fileID: 523846266}
   CompassPanel: {fileID: 412824371}
   StartShortestPathButton: {fileID: 2009659623}

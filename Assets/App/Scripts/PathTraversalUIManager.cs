@@ -1,3 +1,4 @@
+using SphericalPaths.DataStructure;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,10 @@ public class PathTraversalUIManager : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+        // Seta a default camera
+        if (Camera == null)
+            Camera = Camera.main;
+
         StartShortestPathButton.onClick.AddListener(() => StartTraversing(true));
         StartRhumbPathButton.onClick.AddListener(() => StartTraversing(false));
         CancelButton.onClick.AddListener(Cancel);
@@ -41,6 +46,20 @@ public class PathTraversalUIManager : MonoBehaviour
     #endregion
 
     #region Fields/Properties
+
+    /// <summary>
+    /// References the camera that will traverse the path.
+    /// </summary>
+    [Tooltip("References the camera that will traverse the path. By default, it references the main camera.")]
+    [SerializeField]
+    private Camera Camera;
+
+    /// <summary>
+    /// References the sphere that the camera will rotate around.
+    /// </summary>
+    [Tooltip("References the sphere that the camera will rotate around.")]
+    [SerializeField]
+    private SphericalPaths.Sphere Sphere;
 
     /// <summary>
     /// References the planel that holds the teaser.
