@@ -28,6 +28,13 @@ public class PathTraversalManager : MonoBehaviour
     [SerializeField]
     private Camera Camera;
 
+    /// <summary>
+    /// References the sphere that the camera will rotate around.
+    /// </summary>
+    [Tooltip("References the sphere that the camera will rotate around.")]
+    [SerializeField]
+    private SphericalPaths.Sphere Sphere;
+
     #endregion
 
 }
