@@ -163,6 +163,13 @@ public class MainSceneManager : MonoBehaviour
     [SerializeField]
     private ShortestPathTutorialUIManager ShortestPathTutorialUI;
 
+    /// <summary>
+    /// References the UI manager that displays the path traversing.
+    /// </summary>
+    [Tooltip("References the UI manager that displays the path traversing.")]
+    [SerializeField]
+    private PathTraversalUIManager PathTraversalUI;
+
     #endregion
 
     #region Methods

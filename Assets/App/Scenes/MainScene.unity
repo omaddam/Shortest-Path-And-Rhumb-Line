@@ -3983,6 +3983,7 @@ MonoBehaviour:
   PathTraversal: {fileID: 1321234383}
   LegendsUI: {fileID: 2009223568}
   ShortestPathTutorialUI: {fileID: 631313196}
+  PathTraversalUI: {fileID: 1232284521}
 --- !u!114 &1321234382
 MonoBehaviour:
   m_ObjectHideFlags: 0
