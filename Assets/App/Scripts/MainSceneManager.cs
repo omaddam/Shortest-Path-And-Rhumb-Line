@@ -191,9 +191,15 @@ public class MainSceneManager : MonoBehaviour
         // Check if sphere view or plane view
         spherView ??= !Sphere.gameObject.activeSelf;
 
+        // Stop path traversion
+        PathTraversal.Stop();
+
         // Show plane view
         if (!spherView.Value)
         {
+            // Disable sphere rotation
+            Sphere.GetComponent<SphericalPaths.SphereRotation>().enabled = false;
+
             // Hide the sphere, show the plane, and display the two paths
             DisplayPlane();
 
@@ -204,6 +210,9 @@ public class MainSceneManager : MonoBehaviour
         // Show sphere view
         else
         {
+            // Enable sphere rotation
+            Sphere.GetComponent<SphericalPaths.SphereRotation>().enabled = true;
+
             // Hide the plane, show the sphere, and display the two paths
             DisplaySphere();
 
@@ -250,6 +259,7 @@ public class MainSceneManager : MonoBehaviour
         Sphere.DisplayPaths(PathsScriptableObject.RhumbPath, RHUMB_PATH_COLOR);
 
         // Focus on the start coordinates
+        Sphere.GetComponent<SphericalPaths.SphereRotation>().enabled = true;
         Sphere.GetComponent<SphericalPaths.SphereRotation>().Focus(
             PathsScriptableObject.StartCoordinates.CartesianCoordinates.x,
             PathsScriptableObject.StartCoordinates.CartesianCoordinates.y);
