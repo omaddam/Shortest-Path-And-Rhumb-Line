@@ -82,8 +82,8 @@ public class PathTraversalManager : MonoBehaviour
 
         // Add the move operations
         int currentIndex = 0;
-        float timePerSegment = (path.Coordinates.Count - 1) / TOTAL_TIME;
-        for (int i = 0; i < path.Coordinates.Count - 1; i++)
+        float timePerSegment = (path.Coordinates.Count - 2) / TOTAL_TIME;
+        for (int i = 0; i < path.Coordinates.Count - 2; i++)
         {
             sequence.append(() =>
             {
