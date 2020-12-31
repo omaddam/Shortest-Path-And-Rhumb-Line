@@ -109,6 +109,13 @@ public class PathTraversalUIManager : MonoBehaviour
     private GameObject CompassDirection;
 
     /// <summary>
+    /// References the UI element that displays the bearing angle.
+    /// </summary>
+    [Tooltip("References the UI element that displays the bearing angle.")]
+    [SerializeField]
+    private Text BearingText;
+
+    /// <summary>
     /// States if we are currently traversing shortest path or not.
     /// Null: no traversing. True: shortest path traversing. False: rhumb path traversing.
     /// </summary>
@@ -194,6 +201,9 @@ public class PathTraversalUIManager : MonoBehaviour
 
         // Update arrow rotation
         CompassDirection.transform.localEulerAngles = new Vector3(0, 0, -1) * bearing;
+
+        // Display the angle
+        BearingText.text = string.Format("{0:0.000}°", bearing);
     }
 
     #endregion
