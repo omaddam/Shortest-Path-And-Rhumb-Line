@@ -101,6 +101,19 @@ public class PathTraversalUIManager : MonoBehaviour
     [SerializeField]
     private Button CancelButton;
 
+    /// <summary>
+    /// References the arrow in the compass.
+    /// </summary>
+    [Tooltip("References the arrow in the compass.")]
+    [SerializeField]
+    private GameObject CompassDirection;
+
+    /// <summary>
+    /// States if we are currently traversing shortest path or not.
+    /// Null: no traversing. True: shortest path traversing. False: rhumb path traversing.
+    /// </summary>
+    private bool? TraversingShortestPath;
+
     #endregion
 
     #region Methods
@@ -134,6 +147,8 @@ public class PathTraversalUIManager : MonoBehaviour
     /// </summary>
     private void StartTraversing(bool shortestPath)
     {
+        TraversingShortestPath = shortestPath;
+
         // Hide teaser panel
         TeaserPanel.SetActive(false);
 
@@ -152,8 +167,33 @@ public class PathTraversalUIManager : MonoBehaviour
     /// </summary>
     private void Cancel()
     {
+        TraversingShortestPath = null;
+
         // Inform listeners
         OnCancel.Invoke();
+    }
+
+    /// <summary>
+    /// Continuously compute the bearing angle.
+    /// </summary>
+    private void Update()
+    {
+        if (!TraversingShortestPath.HasValue)
+            return;
+
+        // Get the projection of the camera onto the sphere
+        Vector3 cameraProjection = (Camera.transform.position - Sphere.transform.position).normalized * PathsScriptableObject.StartCoordinates.Radius;
+
+        // Get current coordinates
+        Coordinates cameraCoordinates = new Coordinates(cameraProjection,
+            PathsScriptableObject.StartCoordinates.Radius, PathsScriptableObject.StartCoordinates.Width);
+
+        // Compute bearing angle
+        float bearing = PathComputationMethods.ComputeBearingAngle(
+            cameraCoordinates, PathsScriptableObject.EndCoordinates);
+
+        // Update arrow rotation
+        CompassDirection.transform.localEulerAngles = new Vector3(0, 0, -1) * bearing;
     }
 
     #endregion
