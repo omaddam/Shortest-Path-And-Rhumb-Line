@@ -161,7 +161,7 @@ public class ShortestPathTutorialUIManager : MonoBehaviour
         // Hide teaser panel
         TeaserPanel.SetActive(false);
 
-        // Show tutorial poanel
+        // Show tutorial panel
         TutorialPanel.SetActive(true);
 
         // Inform listeners
