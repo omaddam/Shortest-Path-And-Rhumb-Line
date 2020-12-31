@@ -13,13 +13,17 @@ public class PathUIManager : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        GetComponent<Text>().text = string.Format("{0} [Lat: {1:0.000}, Lon: {2:0.000}] to {3} [Lat: {4:0.000}, Lon: {5:0.000}]",
+        GetComponent<Text>().text = string.Format
+        (
+            "{0} [Lat: {1:0.000}, Lon: {2:0.000}] to {3} [Lat: {4:0.000}, Lon: {5:0.000}] | Bearing: {6:0.000}°",
             PathsScriptableObject.StartLabel,
             PathsScriptableObject.StartCoordinates.CartesianCoordinates.y,
             PathsScriptableObject.StartCoordinates.CartesianCoordinates.x,
             PathsScriptableObject.EndLabel,
             PathsScriptableObject.EndCoordinates.CartesianCoordinates.y,
-            PathsScriptableObject.EndCoordinates.CartesianCoordinates.x);
+            PathsScriptableObject.EndCoordinates.CartesianCoordinates.x,
+            SphericalPaths.DataStructure.PathComputationMethods.ComputeBearingAngle(PathsScriptableObject.StartCoordinates, PathsScriptableObject.EndCoordinates)
+        );
     }
 
     #endregion
