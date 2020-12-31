@@ -261,8 +261,8 @@ public class MainSceneManager : MonoBehaviour
         // Focus on the start coordinates
         Sphere.GetComponent<SphericalPaths.SphereRotation>().enabled = true;
         Sphere.GetComponent<SphericalPaths.SphereRotation>().Focus(
-            PathsScriptableObject.StartCoordinates.CartesianCoordinates.x,
-            PathsScriptableObject.StartCoordinates.CartesianCoordinates.y);
+            (PathsScriptableObject.StartCoordinates.CartesianCoordinates.x + PathsScriptableObject.EndCoordinates.CartesianCoordinates.y) / 2f,
+            (PathsScriptableObject.StartCoordinates.CartesianCoordinates.y + PathsScriptableObject.EndCoordinates.CartesianCoordinates.y) / 2f);
 
         // Change switch button text
         SwitchButton.GetComponentInChildren<Text>().text = "Switch to plane view";
