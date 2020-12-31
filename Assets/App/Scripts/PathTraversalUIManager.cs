@@ -55,6 +55,11 @@ public class PathTraversalUIManager : MonoBehaviour
     private Camera Camera;
 
     /// <summary>
+    /// References the sphere in the scene.
+    /// </summary>
+    public SphericalPaths.Sphere Sphere;
+
+    /// <summary>
     /// References the scriptable object that stores the demo information.
     /// </summary>
     [Tooltip("References the scriptable object that stores the demo information.")]
