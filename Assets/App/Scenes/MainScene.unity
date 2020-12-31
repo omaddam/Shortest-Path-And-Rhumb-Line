@@ -3802,6 +3802,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1232284520}
   - component: {fileID: 1232284522}
+  - component: {fileID: 1232284521}
   m_Layer: 5
   m_Name: PathTraversing
   m_TagString: Untagged
@@ -3830,6 +3831,18 @@ RectTransform:
   m_AnchoredPosition: {x: -135, y: -350}
   m_SizeDelta: {x: 250, y: 560}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1232284521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232284519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1379666d7bd2304581cd9dfc8278aae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &1232284522
 CanvasRenderer:
   m_ObjectHideFlags: 0
