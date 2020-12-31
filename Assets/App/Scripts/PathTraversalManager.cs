@@ -125,6 +125,14 @@ public class PathTraversalManager : MonoBehaviour
         LeanTween.move(Camera.gameObject, targetPosition, time);
     }
 
+    /// <summary>
+    /// Stops the camera from traversing the current path.
+    /// </summary>
+    public void Stop()
+    {
+        LeanTween.cancel(gameObject);
+    }
+
     #endregion
 
 }
