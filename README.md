@@ -63,6 +63,11 @@ git flow init
 * Contains all scripts and resources used in the demo.
 * Scripts are created under Assets/App/Scripts folder.
 
+### Third Party Packages
+
+* All packages should be included under Assets/ThirdParty folder.
+* Contains all packages downloaded from the Unity3d store.
+
 ### Assets / Others
 
 * All components should be included under Assets/\<Name> folder. (e.g. Assets/SphericalPaths)
