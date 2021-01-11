@@ -119,5 +119,17 @@ A *Path* uses line renderers to represent paths, trails, and projections on a ma
 * Script: Assets/SphericalPaths/Scripts/Path.cs
   * Initialize: sets the color and displays lines to connect all the coordinates.
 
-### Plane
-### Sphere
+### Plane / Sphere
+
+A 2D plane / 3D spherical map that uses the two prefabs; *Point* and *Path*; to visualize the shortest path and rhumb line between two coordinates.
+
+* Prefabs: 
+  * Assets/SphericalPaths/Prefabs/Plane.prefab
+  * Assets/SphericalPaths/Prefabs/Sphere.prefab
+* Scripts: 
+  * Assets/SphericalPaths/Scripts/Plane.cs
+  * Assets/SphericalPaths/Scripts/Sphere.cs
+    * ClearPoints: deletes all points on the map.
+    * DisplayPoints: appends and displays points on the map.
+    * ClearPaths: deletes all paths on the map.
+    * DisplayPaths: appends and displays paths on the graph.
