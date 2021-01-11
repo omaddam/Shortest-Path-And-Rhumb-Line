@@ -97,3 +97,10 @@ The data structure contains 3 classes.
     * **Coordinates**: list of coordinates sorted in the order that defines the path.
     * **Start**: references the first coordinates in the path.
     * **Last**: references the last coordinates in the path.
+
+* **PathComputationMethods**: a static class that provides extensions and methods to compute paths and bearing angles. We only list some of the methods below.
+  * Methods
+    * **GetRhumbPath**: generates the path between the two coordinates using rhumb line.
+    * **GetShortestPath**: generates the path between the two coordinates using shortest path.
+    * **ComputeRhumbPathBearingAngle**: computes the bearing angle at a provided coordinates while facing a target in a direction that follows the rhumb line path.
+    * **ComputeShortestPathBearingAngle**: computes the bearing angle at a provided coordinates while facing a target in a direction that follows the shortest path.
