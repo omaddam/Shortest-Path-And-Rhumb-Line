@@ -73,3 +73,9 @@ git flow init
 * All components should be included under Assets/\<Name> folder. (e.g. Assets/SphericalPaths)
 * Each component should be isolated and under **NO CIRCUMSTANCES** referencing or using another component's scripts.
 * Components are **NOT** allowed to reference or call application/demo scripts.
+
+# Code Based Documentation
+
+## Assets / SphericalPaths
+
+This folder contains the implementation of the algorithms that compute the shortest path and the constant path (rhumb line). The algorithms' implementation can be found in the *DataStructure* folder while the rest of the components are for visualization purposes.
