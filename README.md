@@ -113,5 +113,11 @@ A *Point* represents coordinates on a map in the form of a pin. It is used as a 
   * Initialize: sets the color, location, and rotation of the pin.
 
 ### Path
+
+A *Path* uses line renderers to represent paths, trails, and projections on a map. It is mainly used as a template by the plane and sphere components when displaying the paths.
+* Prefab: Assets/SphericalPaths/Prefabs/Path.prefab
+* Script: Assets/SphericalPaths/Scripts/Path.cs
+  * Initialize: sets the color and displays lines to connect all the coordinates.
+
 ### Plane
 ### Sphere
