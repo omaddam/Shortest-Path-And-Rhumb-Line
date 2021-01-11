@@ -104,3 +104,14 @@ The data structure contains 3 classes.
     * **GetShortestPath**: generates the path between the two coordinates using shortest path.
     * **ComputeRhumbPathBearingAngle**: computes the bearing angle at a provided coordinates while facing a target in a direction that follows the rhumb line path.
     * **ComputeShortestPathBearingAngle**: computes the bearing angle at a provided coordinates while facing a target in a direction that follows the shortest path.
+
+### Point
+
+A *Point* represents coordinates on a map in the form of a pin. It is used as a template by the plane and sphere components when displaying the coordinates.
+* Prefab: Assets/SphericalPaths/Prefabs/Point.prefab
+* Script: Assets/SphericalPaths/Scripts/Point.cs
+  * Initialize: sets the color, location, and rotation of the pin.
+
+### Path
+### Plane
+### Sphere
