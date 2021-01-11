@@ -79,3 +79,15 @@ git flow init
 ## Assets / SphericalPaths
 
 This folder contains the implementation of the algorithms that compute the shortest path and the constant path (rhumb line). The algorithms' implementation can be found in the *DataStructure* folder while the rest of the components are for visualization purposes.
+
+### DataStructure
+
+The data structure contains 3 classes.
+
+* **Coordinates**: represents a single point on a map.
+  * Properties
+    * **CartesianCoordinates**: the latitude and longitude coordinates of the point.
+    * **Width**: the width of the 2D plane this point will be presented on. The width is double the height.
+    * **PlaneCoordinates**: x and y coordinates normalized and scaled to be displayed on the 2D plane.
+    * **Radius**: the radius of the 3D sphere this point will be presented on.
+    * **SphericalCoordinates**: x, y, and z coordinates normalized ands caled to be displayed on the 3D sphere.
