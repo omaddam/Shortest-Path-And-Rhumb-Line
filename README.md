@@ -133,3 +133,6 @@ A 2D plane / 3D spherical map that uses the two prefabs; *Point* and *Path*; to 
     * DisplayPoints: appends and displays points on the map.
     * ClearPaths: deletes all paths on the map.
     * DisplayPaths: appends and displays paths on the graph.
+
+The sphere prefab also includes another script that allows the user to drag and rotate the map.
+* Script: Assets/SphericalPaths/Scripts/SphereRotation.cs
